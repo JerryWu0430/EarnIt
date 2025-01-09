@@ -31,7 +31,7 @@ struct Splash: View {
             
             CustomButton(buttonType: .full, text: "Get Started")
                 .onTapGesture {
-                    viewModel.flow = .signUp
+                    viewModel.flow = .register
                     viewModel.reset()
                     presentingLoginScreen.wrappedValue.toggle()
                 }

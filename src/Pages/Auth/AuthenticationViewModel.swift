@@ -19,7 +19,7 @@ enum AuthenticationState {
 
 enum AuthenticationFlow {
   case login
-  case signUp
+  case register
 }
 
 @MainActor
@@ -62,7 +62,7 @@ class AuthenticationViewModel: ObservableObject {
   }
 
   func switchFlow() {
-    flow = flow == .login ? .signUp : .login
+    flow = flow == .login ? .register : .login
     errorMessage = ""
   }
 
@@ -76,7 +76,7 @@ class AuthenticationViewModel: ObservableObject {
   }
 
   func reset() {
-    flow = .login
+    //flow = .login
     email = ""
     password = ""
     confirmPassword = ""

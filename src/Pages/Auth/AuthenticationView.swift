@@ -18,7 +18,7 @@ struct AuthenticationView: View {
       case .login:
         Login()
           .environmentObject(viewModel)
-      case .signUp:
+      case .register:
         Register()
           .environmentObject(viewModel)
       }

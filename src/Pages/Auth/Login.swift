@@ -43,6 +43,9 @@ struct Login: View {
         VStack(alignment: .leading){
             HStack{
                 CustomButton(buttonType: .arrow, arrowDirection: .left)
+                    .onTapGesture {
+                        dismiss()
+                    }
                 Spacer()
             }.padding(.leading)
             
@@ -97,6 +100,9 @@ struct Login: View {
             
             CustomButton(buttonType: .full, text: viewModel.authenticationState != .authenticating ? "Login" : "Loading...")
                 .disabled(!viewModel.isValid)
+                .onTapGesture {
+                    signInWithEmailPassword()
+                }
                 .padding([.horizontal,.bottom])
             
             HStack{

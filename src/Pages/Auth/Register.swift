@@ -29,10 +29,21 @@ struct Register: View {
       }
     }
     
+    private func signUpWithGoogle() {
+        Task {
+            if await viewModel.signInWithGoogle() == true {
+                dismiss()
+            }
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .leading){
             HStack{
                 CustomButton(buttonType: .arrow, arrowDirection: .left)
+                    .onTapGesture {
+                        dismiss()
+                    }
                 Spacer()
             }.padding(.leading)
             
@@ -104,7 +115,9 @@ struct Register: View {
                     .frame(height:1)
             }.padding(.horizontal)
             
-            SocialButton(buttonType: .Google, text: "Sign up with google")
+            SocialButton(buttonType: .Google, text: "Sign up with google"){
+                signUpWithGoogle()
+                }
                 .padding()
             
             Spacer()
