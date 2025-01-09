@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct Splash: View {
+    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @Environment(\.presentingLoginScreenBinding) var presentingLoginScreen
+    
     var body: some View {
-        VStack{
+        VStack {
             Spacer()
             Circle()
                 .frame(width: 200, height: 185)
@@ -17,7 +20,6 @@ struct Splash: View {
                 .overlay(content: {
                     Image("logo")
                 }).padding(.bottom)
-            
             
             Text("EarnIt!")
                 .font(.largeTitle)
@@ -28,8 +30,19 @@ struct Splash: View {
             Spacer()
             
             CustomButton(buttonType: .full, text: "Get Started")
+                .onTapGesture {
+                    viewModel.flow = .signUp
+                    viewModel.reset()
+                    presentingLoginScreen.wrappedValue.toggle()
+                }
                 .padding(.horizontal)
+            
             CustomButton(buttonType: .outline, text: "Already Have an Account")
+                .onTapGesture {
+                    viewModel.flow = .login
+                    viewModel.reset()
+                    presentingLoginScreen.wrappedValue.toggle()
+                }
                 .padding(.horizontal)
         }
     }

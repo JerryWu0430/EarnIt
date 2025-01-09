@@ -56,9 +56,29 @@ struct Login: View {
                 .foregroundStyle(.gray)
                 .padding([.leading, .bottom])
             
-            CustomTextInput(text: .constant(""), label: "Email")
+            CustomTextInput(text: $viewModel.email, label: "Email")
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .focused($focus, equals: .email)
+                .submitLabel(.next)
+                .onSubmit {
+                    self.focus = .password
+                }
                 .padding(.bottom)
-            CustomTextInput(text: .constant(""), label: "Password", protected: true)
+            
+            CustomTextInput(text: $viewModel.password, label: "Password", protected: true)
+                .focused($focus, equals: .password)
+                .submitLabel(.go)
+                .onSubmit {
+                    signInWithEmailPassword()
+                }
+            
+            if !viewModel.errorMessage.isEmpty {
+                Text(viewModel.errorMessage)
+                    .foregroundColor(Color(UIColor.systemRed))
+                    .padding(.horizontal)
+            }
+            
             HStack{
                 Spacer()
                 Text("Forgot Password?")
@@ -75,7 +95,8 @@ struct Login: View {
                 Spacer()
             }.padding(.vertical)
             
-            CustomButton(buttonType: .full, text: "Login")
+            CustomButton(buttonType: .full, text: viewModel.authenticationState != .authenticating ? "Login" : "Loading...")
+                .disabled(!viewModel.isValid)
                 .padding([.horizontal,.bottom])
             
             HStack{
@@ -99,10 +120,15 @@ struct Login: View {
             
             HStack{
                 Spacer()
-                Text("Don't have an account? **Sign Up**")
+                Text("Don't have an account? ")
+                Button(action: { viewModel.switchFlow() }) {
+                    Text("Sign Up")
+                        .fontWeight(.bold)
+                }
                 Spacer()
             }
         }
+        .analyticsScreen(name: "\(Self.self)")
     }
 }
 

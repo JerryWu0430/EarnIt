@@ -6,8 +6,29 @@
 //
 
 import SwiftUI
+import Combine
+import FirebaseAnalytics
+
+private enum FocusableField: Hashable {
+  case email
+  case password
+  case confirmPassword
+}
 
 struct Register: View {
+    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @Environment(\.dismiss) var dismiss
+
+    @FocusState private var focus: FocusableField?
+
+    private func signUpWithEmailPassword() {
+      Task {
+        if await viewModel.signUpWithEmailPassword() == true {
+          dismiss()
+        }
+      }
+    }
+    
     var body: some View {
         VStack(alignment: .leading){
             HStack{
@@ -25,11 +46,36 @@ struct Register: View {
                 .foregroundStyle(.gray)
                 .padding([.leading, .bottom])
             
-            CustomTextInput(text: .constant(""), label: "Name")
+            CustomTextInput(text: $viewModel.email, label: "Email")
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .focused($focus, equals: .email)
+                .submitLabel(.next)
+                .onSubmit {
+                    self.focus = .password
+                }
                 .padding(.bottom)
-            CustomTextInput(text: .constant(""), label: "Email")
+            
+            CustomTextInput(text: $viewModel.password, label: "Password", protected: true)
+                .focused($focus, equals: .password)
+                .submitLabel(.next)
+                .onSubmit {
+                    self.focus = .confirmPassword
+                }
                 .padding(.bottom)
-            CustomTextInput(text: .constant(""), label: "Password", protected: true)
+            
+            CustomTextInput(text: $viewModel.confirmPassword, label: "Confirm Password", protected: true)
+                .focused($focus, equals: .confirmPassword)
+                .submitLabel(.go)
+                .onSubmit {
+                    signUpWithEmailPassword()
+                }
+
+            if !viewModel.errorMessage.isEmpty {
+                Text(viewModel.errorMessage)
+                    .foregroundColor(Color(UIColor.systemRed))
+                    .padding(.horizontal)
+            }
 
             HStack{
                 Spacer()
@@ -39,7 +85,11 @@ struct Register: View {
                 Spacer()
             }.padding(.vertical)
             
-            CustomButton(buttonType: .full, text: "Sign Up")
+            CustomButton(buttonType: .full, text: viewModel.authenticationState != .authenticating ? "Sign Up" : "Loading...")
+                .disabled(!viewModel.isValid)
+                .onTapGesture {
+                    signUpWithEmailPassword()
+                }
                 .padding([.horizontal,.bottom])
             
             HStack{
@@ -61,10 +111,15 @@ struct Register: View {
             
             HStack{
                 Spacer()
-                Text("Have an account already? **Sign In**")
+                Button(action: { viewModel.switchFlow() }) {
+                    Text("Have an account already? ")
+                    Text("Sign In")
+                        .fontWeight(.bold)
+                }
                 Spacer()
             }
         }
+        .analyticsScreen(name: "\(Self.self)")
     }
 }
 

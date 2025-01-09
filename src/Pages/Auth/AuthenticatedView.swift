@@ -8,6 +8,26 @@
 
 import SwiftUI
 
+private struct PresentingLoginScreenKey: EnvironmentKey {
+    static let defaultValue: Bool = false
+}
+
+private struct PresentingLoginScreenBindingKey: EnvironmentKey {
+    static let defaultValue: Binding<Bool> = .constant(false)
+}
+
+extension EnvironmentValues {
+    var presentingLoginScreen: Bool {
+        get { self[PresentingLoginScreenKey.self] }
+        set { self[PresentingLoginScreenKey.self] = newValue }
+    }
+    
+    var presentingLoginScreenBinding: Binding<Bool> {
+        get { self[PresentingLoginScreenBindingKey.self] }
+        set { self[PresentingLoginScreenBindingKey.self] = newValue }
+    }
+}
+
 extension AuthenticatedView where Unauthenticated == EmptyView {
   init(@ViewBuilder content: @escaping () -> Content) {
     self.unauthenticated = nil
@@ -35,38 +55,36 @@ struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Un
 
 
   var body: some View {
-    switch viewModel.authenticationState {
-    case .unauthenticated, .authenticating:
-      VStack {
+    ZStack {
+      switch viewModel.authenticationState {
+      case .unauthenticated, .authenticating:
         if let unauthenticated {
-          unauthenticated
-        }
-        else {
+          AnyView(unauthenticated)
+            .environmentObject(viewModel)
+            .environment(\.presentingLoginScreen, presentingLoginScreen)
+            .environment(\.presentingLoginScreenBinding, $presentingLoginScreen)
+        } else {
           Text("You're not logged in.")
         }
-        Button("Tap here to log in") {
-          viewModel.reset()
-          presentingLoginScreen.toggle()
+      case .authenticated:
+        VStack {
+          content()
+          Text("You're logged in as \(viewModel.displayName).")
+          Button("Tap here to view your profile") {
+            presentingProfileScreen.toggle()
+          }
+        }
+        .sheet(isPresented: $presentingProfileScreen) {
+          NavigationStack {
+            UserProfileView()
+              .environmentObject(viewModel)
+          }
         }
       }
-      .sheet(isPresented: $presentingLoginScreen) {
-        AuthenticationView()
-          .environmentObject(viewModel)
-      }
-    case .authenticated:
-      VStack {
-        content()
-        Text("You're logged in as \(viewModel.displayName).")
-        Button("Tap here to view your profile") {
-          presentingProfileScreen.toggle()
-        }
-      }
-      .sheet(isPresented: $presentingProfileScreen) {
-        NavigationStack {
-          UserProfileView()
-            .environmentObject(viewModel)
-        }
-      }
+    }
+    .sheet(isPresented: $presentingLoginScreen) {
+      AuthenticationView()
+        .environmentObject(viewModel)
     }
   }
 }
