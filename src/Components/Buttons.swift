@@ -76,49 +76,58 @@ enum SocialButtonTypes{
 }
 
 //For Social Login(could be used for others but no use case for now)
-struct SocialButton: View{
+struct SocialButton: View {
     var buttonType: SocialButtonTypes
     var text: String
+    var action: (() -> Void)? // Optional action closure
     
-    var body: some View{
-        switch buttonType {
-        case .Google:
-            ZStack{
-                Rectangle()
-                    .frame(height: CGFloat(50))
-                    .foregroundStyle(.gray)
-                    .cornerRadius(10)
-                Rectangle()
-                    .frame(height: CGFloat(48))
-                    .foregroundStyle(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal,1)
-                HStack{
-                    Spacer()
-                    Text(text)
-                        .foregroundStyle(.black)
-                    Spacer()
-                }
-                HStack{
-                    Spacer()
-                    Image("Google")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24, alignment: .center)
-                        .padding(.trailing, 12)
+    var body: some View {
+        Button(action: {
+            action?() // Trigger the action when tapped
+        }) {
+            ZStack {
+                switch buttonType {
+                case .Google:
+                    ZStack {
+                        Rectangle()
+                            .frame(height: CGFloat(50))
+                            .foregroundStyle(.gray)
+                            .cornerRadius(10)
+                        Rectangle()
+                            .frame(height: CGFloat(48))
+                            .foregroundStyle(.white)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 1)
+                        HStack {
+                            Spacer()
+                            Text(text)
+                                .foregroundStyle(.black)
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            Image("Google")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24, height: 24, alignment: .center)
+                                .padding(.trailing, 12)
+                        }
+                    }
+                case .Apple:
+                    Rectangle()
+                        .frame(height: 50)
+                        .foregroundStyle(.black) // Example placeholder
+                case .Facebook:
+                    Rectangle()
+                        .frame(height: 50)
+                        .foregroundStyle(.blue) // Example placeholder
                 }
             }
-        case .Apple:
-            //TODO: Implement Later if needed
-            Rectangle()
-                .frame(height: 50)
-        case .Facebook:
-            //TODO: Implement Later if needed
-            Rectangle()
-                .frame(height: 50)
         }
+        .buttonStyle(PlainButtonStyle()) // Prevent default button styling if needed
     }
 }
+
 
 struct NavigationButton : View {
     var image: String

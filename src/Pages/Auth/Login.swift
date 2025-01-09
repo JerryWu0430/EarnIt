@@ -6,8 +6,39 @@
 //
 
 import SwiftUI
+import Combine
+import FirebaseAnalytics
+
+
+private enum FocusableField: Hashable {
+    case email
+    case password
+    
+}
 
 struct Login: View {
+    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) var dismiss
+
+    @FocusState private var focus: FocusableField?
+    
+    private func signInWithEmailPassword() {
+        Task {
+            if await viewModel.signInWithEmailPassword() == true {
+                dismiss()
+            }
+        }
+    }
+
+    private func signInWithGoogle() {
+        Task {
+            if await viewModel.signInWithGoogle() == true {
+                dismiss()
+            }
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .leading){
             HStack{
@@ -59,7 +90,9 @@ struct Login: View {
                     .frame(height:1)
             }.padding(.horizontal)
             
-            SocialButton(buttonType: .Google, text: "Login with google")
+            SocialButton(buttonType: .Google, text: "Login with google"){
+                signInWithGoogle()
+            }
                 .padding()
             
             Spacer()
