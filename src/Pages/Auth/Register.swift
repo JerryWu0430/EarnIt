@@ -124,8 +124,8 @@ struct Register: View {
             
             HStack{
                 Spacer()
+                Text("Have an account already? ")
                 Button(action: { viewModel.switchFlow() }) {
-                    Text("Have an account already? ")
                     Text("Sign In")
                         .fontWeight(.bold)
                 }
