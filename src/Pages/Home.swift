@@ -23,6 +23,7 @@ struct Home: View {
                     Image(systemName: "gearshape.fill")
                         .resizable()
                         .frame(width: 24, height: 24)
+                        .foregroundColor(Color(hex: "#FD6854"))
                 }
             }.padding()
             

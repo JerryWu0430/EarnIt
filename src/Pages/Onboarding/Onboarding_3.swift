@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Onboarding_3: View {
-    //Change
     @State var name: String = ""
+    @Binding var currentStep: Int
     
     var body: some View {
         VStack{
@@ -23,7 +23,7 @@ struct Onboarding_3: View {
                 }.frame(width: 302, height: 302)
             }.padding(.top, 100)
             
-            Text("What subjects do you want \nyour child to focus on?")
+            Text("What subjects do you want \n to focus on?")
                 .multilineTextAlignment(.center)
                 .font(.title3)
                 .fontWeight(.bold)
@@ -35,14 +35,16 @@ struct Onboarding_3: View {
             Spacer()
             
             HStack{
-                Paginations(totalCount: 6, currentIndex: .constant(3), paginationType: .onboarding)
+                Paginations(totalCount: 5, currentIndex: .constant(2), paginationType: .onboarding)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right)
+                CustomButton(buttonType: .arrow, arrowDirection: .right) {
+                    currentStep += 1
+                }
             }.padding(.bottom).padding(.horizontal)
         }
     }
 }
 
 #Preview {
-    Onboarding_3()
+    Onboarding_3(currentStep: .constant(2))
 }

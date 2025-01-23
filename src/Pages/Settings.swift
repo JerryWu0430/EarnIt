@@ -18,18 +18,14 @@ struct Settings: View {
                 VStack{
                     HStack{
                         CustomButton(buttonType: .arrow, arrowDirection: .left, variant: .small)
+                            .onTapGesture {
+                                dismiss()
+                            }
                         Spacer()
                     }.padding()
                     Spacer()
                 }
                 VStack(alignment: .center){
-                    HStack{
-                        Spacer()
-                        Text("Settings")
-                            .font(.title)
-                            .padding(.top)
-                        Spacer()
-                    }.padding()
                     VStack {
                         HStack {
                             Spacer()

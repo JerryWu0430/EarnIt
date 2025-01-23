@@ -90,6 +90,19 @@
 		ED403E7F2D2F46A4008B6DC3 /* AuthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedView.swift; sourceTree = "<group>"; };
 		ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		EDEFBCDC2D42C7D900F15B7A /* PendingVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingVerificationView.swift; sourceTree = "<group>"; };
+		EDEFBCDE2D42EB2600F15B7A /* implicit.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = implicit.gql; sourceTree = "<group>"; };
+		EDEFBCDF2D42EB2600F15B7A /* input.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.gql; sourceTree = "<group>"; };
+		EDEFBCE02D42EB2600F15B7A /* mutation.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutation.gql; sourceTree = "<group>"; };
+		EDEFBCE12D42EB2600F15B7A /* query.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = query.gql; sourceTree = "<group>"; };
+		EDEFBCE22D42EB2600F15B7A /* relation.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = relation.gql; sourceTree = "<group>"; };
+		EDEFBCE42D42EB2600F15B7A /* prelude.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = prelude.gql; sourceTree = "<group>"; };
+		EDEFBCE72D42EB2600F15B7A /* connector.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = connector.yaml; sourceTree = "<group>"; };
+		EDEFBCE82D42EB2600F15B7A /* mutations.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutations.gql; sourceTree = "<group>"; };
+		EDEFBCE92D42EB2600F15B7A /* queries.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = queries.gql; sourceTree = "<group>"; };
+		EDEFBCEB2D42EB2600F15B7A /* schema.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema.gql; sourceTree = "<group>"; };
+		EDEFBCED2D42EB2600F15B7A /* dataconnect.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = dataconnect.yaml; sourceTree = "<group>"; };
+		EDEFBCEF2D42EB2600F15B7A /* DefaultConnector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DefaultConnector; sourceTree = "<group>"; };
+		EDEFBCF22D42EB2600F15B7A /* firebase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +178,9 @@
 		56B385582CE3719E003F2CD4 = {
 			isa = PBXGroup;
 			children = (
+				EDEFBCEE2D42EB2600F15B7A /* dataconnect */,
+				EDEFBCF12D42EB2600F15B7A /* dataconnect-generated */,
+				EDEFBCF22D42EB2600F15B7A /* firebase.json */,
 				ED403E7C2D2F3A22008B6DC3 /* ios-Info.plist */,
 				56B385632CE3719E003F2CD4 /* src */,
 				56B385622CE3719E003F2CD4 /* Products */,
@@ -231,6 +247,80 @@
 				56EE6DBC2CF8D61F00A6438B /* year1_randomQs.json */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		EDEFBCE32D42EB2600F15B7A /* main */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCDE2D42EB2600F15B7A /* implicit.gql */,
+				EDEFBCDF2D42EB2600F15B7A /* input.gql */,
+				EDEFBCE02D42EB2600F15B7A /* mutation.gql */,
+				EDEFBCE12D42EB2600F15B7A /* query.gql */,
+				EDEFBCE22D42EB2600F15B7A /* relation.gql */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		EDEFBCE52D42EB2600F15B7A /* schema */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCE32D42EB2600F15B7A /* main */,
+				EDEFBCE42D42EB2600F15B7A /* prelude.gql */,
+			);
+			path = schema;
+			sourceTree = "<group>";
+		};
+		EDEFBCE62D42EB2600F15B7A /* .dataconnect */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCE52D42EB2600F15B7A /* schema */,
+			);
+			path = .dataconnect;
+			sourceTree = "<group>";
+		};
+		EDEFBCEA2D42EB2600F15B7A /* connector */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCE72D42EB2600F15B7A /* connector.yaml */,
+				EDEFBCE82D42EB2600F15B7A /* mutations.gql */,
+				EDEFBCE92D42EB2600F15B7A /* queries.gql */,
+			);
+			path = connector;
+			sourceTree = "<group>";
+		};
+		EDEFBCEC2D42EB2600F15B7A /* schema */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCEB2D42EB2600F15B7A /* schema.gql */,
+			);
+			path = schema;
+			sourceTree = "<group>";
+		};
+		EDEFBCEE2D42EB2600F15B7A /* dataconnect */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCE62D42EB2600F15B7A /* .dataconnect */,
+				EDEFBCEA2D42EB2600F15B7A /* connector */,
+				EDEFBCEC2D42EB2600F15B7A /* schema */,
+				EDEFBCED2D42EB2600F15B7A /* dataconnect.yaml */,
+			);
+			path = dataconnect;
+			sourceTree = "<group>";
+		};
+		EDEFBCF02D42EB2600F15B7A /* swift */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCEF2D42EB2600F15B7A /* DefaultConnector */,
+			);
+			path = swift;
+			sourceTree = "<group>";
+		};
+		EDEFBCF12D42EB2600F15B7A /* dataconnect-generated */ = {
+			isa = PBXGroup;
+			children = (
+				EDEFBCF02D42EB2600F15B7A /* swift */,
+			);
+			path = "dataconnect-generated";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -41,6 +41,7 @@ class AuthenticationViewModel: ObservableObject {
   @Published var user: User?
   @Published var displayName: String = ""
   @Published var isEmailVerified = false
+  @Published var showOnboarding = false
 
   init() {
     print("Initial flow: \(flow)")
@@ -54,6 +55,8 @@ class AuthenticationViewModel: ObservableObject {
         : !(email.isEmpty || password.isEmpty || confirmPassword.isEmpty)
       }
       .assign(to: &$isValid)
+
+    self.user = Auth.auth().currentUser
   }
 
   private var authStateHandler: AuthStateDidChangeListenerHandle?
@@ -101,6 +104,47 @@ class AuthenticationViewModel: ObservableObject {
       print("Error reloading user: \(error)")
     }
   }
+
+  func signIn(email: String, password: String) async -> Bool {
+    do {
+      let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
+      self.user = authResult.user
+      // Check if user needs onboarding
+      checkOnboardingStatus()
+      return true
+    } catch {
+      print(error)
+      return false
+    }
+  }
+
+  func signUp(email: String, password: String) async -> Bool {
+    do {
+      let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+      self.user = authResult.user
+      // New users always need onboarding
+      self.showOnboarding = true
+      return true
+    } catch {
+      print(error)
+      return false
+    }
+  }
+
+  func signOut() {
+    do {
+      try Auth.auth().signOut()
+      self.user = nil
+    } catch {
+      print(error)
+    }
+  }
+
+  func checkOnboardingStatus() {
+    // TODO: Replace with actual check from your backend/Firestore
+    // For now, we'll assume all users need onboarding
+    self.showOnboarding = true
+  }
 }
 
 extension AuthenticationViewModel {
@@ -132,17 +176,6 @@ extension AuthenticationViewModel {
       errorMessage = error.localizedDescription
       authenticationState = .unauthenticated
       return false
-    }
-  }
-
-  func signOut() {
-    do {
-      try Auth.auth().signOut()
-      authenticationState = .unauthenticated
-    }
-    catch {
-      print(error)
-      errorMessage = error.localizedDescription
     }
   }
 
