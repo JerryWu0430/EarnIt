@@ -201,3 +201,17 @@ extension AuthenticationViewModel {
       }
   }
 }
+
+extension AuthenticationViewModel {
+  func resetPassword() async -> Bool {
+    do {
+      try await Auth.auth().sendPasswordReset(withEmail: email)
+      errorMessage = "Password reset email sent. Please check your inbox."
+      return true
+    } catch {
+      print(error)
+      errorMessage = error.localizedDescription
+      return false
+    }
+  }
+}
