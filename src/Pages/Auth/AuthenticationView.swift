@@ -11,15 +11,20 @@ import Combine
 
 struct AuthenticationView: View {
   @EnvironmentObject var viewModel: AuthenticationViewModel
+  @Binding var isPresented: Bool
 
   var body: some View {
-    VStack {
+    print("Current flow: \(viewModel.flow)")
+    return VStack {
       switch viewModel.flow {
+      case .splash:
+        Splash()
+          .environmentObject(viewModel)
       case .login:
         Login()
           .environmentObject(viewModel)
       case .register:
-        Register()
+        Register(rootIsPresented: $isPresented)
           .environmentObject(viewModel)
       }
     }
@@ -28,7 +33,7 @@ struct AuthenticationView: View {
 
 struct AuthenticationView_Previews: PreviewProvider {
   static var previews: some View {
-    AuthenticationView()
+    AuthenticationView(isPresented: .constant(true))
       .environmentObject(AuthenticationViewModel())
   }
 }

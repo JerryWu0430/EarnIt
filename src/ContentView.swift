@@ -11,17 +11,15 @@ struct ContentView: View {
     @StateObject private var viewModel = AuthenticationViewModel()
     
     var body: some View {
-        NavigationStack {
-            AuthenticatedView(
-                unauthenticated: {
-                    Splash()
-                },
-                content: {
-                    Home()
-                }
-            )
-            .environmentObject(viewModel)
-        }
+        AuthenticatedView(
+            unauthenticated: {
+                Splash()
+            },
+            content: {
+                Home()
+            }
+        )
+        .environmentObject(viewModel)
     }
 }
 

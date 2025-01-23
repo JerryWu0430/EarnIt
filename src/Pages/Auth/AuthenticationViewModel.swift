@@ -18,6 +18,7 @@ enum AuthenticationState {
 }
 
 enum AuthenticationFlow {
+  case splash
   case login
   case register
 }
@@ -28,15 +29,21 @@ class AuthenticationViewModel: ObservableObject {
   @Published var password: String = ""
   @Published var confirmPassword: String = ""
 
-  @Published var flow: AuthenticationFlow = .login
+  @Published var flow: AuthenticationFlow = .splash {
+    didSet {
+      print("Flow changed to: \(flow)")
+    }
+  }
 
   @Published var isValid: Bool  = false
   @Published var authenticationState: AuthenticationState = .unauthenticated
   @Published var errorMessage: String = ""
   @Published var user: User?
   @Published var displayName: String = ""
+  @Published var isEmailVerified = false
 
   init() {
+    print("Initial flow: \(flow)")
     registerAuthStateHandler()
 
     $flow
@@ -81,6 +88,19 @@ class AuthenticationViewModel: ObservableObject {
     password = ""
     confirmPassword = ""
   }
+
+  func checkEmailVerification() async {
+    do {
+      try await Auth.auth().currentUser?.reload()
+      if Auth.auth().currentUser?.isEmailVerified == true {
+        await MainActor.run {
+          isEmailVerified = true
+        }
+      }
+    } catch {
+      print("Error reloading user: \(error)")
+    }
+  }
 }
 
 extension AuthenticationViewModel {
@@ -88,6 +108,8 @@ extension AuthenticationViewModel {
     authenticationState = .authenticating
     do {
       try await Auth.auth().signIn(withEmail: self.email, password: self.password)
+      authenticationState = .authenticated
+      print("User signed in with email/password. State: \(authenticationState)")
       return true
     }
     catch  {
@@ -100,11 +122,12 @@ extension AuthenticationViewModel {
 
   func signUpWithEmailPassword() async -> Bool {
     authenticationState = .authenticating
-    do  {
-      try await Auth.auth().createUser(withEmail: email, password: password)
+    do {
+      let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+      try await authResult.user.sendEmailVerification()
+      authenticationState = .authenticated
       return true
-    }
-    catch {
+    } catch {
       print(error)
       errorMessage = error.localizedDescription
       authenticationState = .unauthenticated
@@ -115,6 +138,7 @@ extension AuthenticationViewModel {
   func signOut() {
     do {
       try Auth.auth().signOut()
+      authenticationState = .unauthenticated
     }
     catch {
       print(error)
@@ -166,6 +190,8 @@ extension AuthenticationViewModel {
         let result = try await Auth.auth().signIn(with: credential)
         let firebaseUser = result.user
         print("User \(firebaseUser.uid) signed in with email \(firebaseUser.email ?? "unknown")")
+        authenticationState = .authenticated
+        isEmailVerified = true
         return true
       }
       catch {

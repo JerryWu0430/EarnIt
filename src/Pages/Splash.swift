@@ -12,7 +12,8 @@ struct Splash: View {
     @Environment(\.presentingLoginScreenBinding) var presentingLoginScreen
     
     var body: some View {
-        VStack {
+        print("Splash view initialized")
+        return VStack {
             Spacer()
             Circle()
                 .frame(width: 200, height: 185)
@@ -31,6 +32,7 @@ struct Splash: View {
             
             CustomButton(buttonType: .full, text: "Get Started")
                 .onTapGesture {
+                    print("Get Started tapped")
                     viewModel.flow = .register
                     viewModel.reset()
                     presentingLoginScreen.wrappedValue.toggle()
@@ -39,6 +41,7 @@ struct Splash: View {
             
             CustomButton(buttonType: .outline, text: "Already Have an Account")
                 .onTapGesture {
+                    print("Already Have an Account tapped")
                     viewModel.flow = .login
                     viewModel.reset()
                     presentingLoginScreen.wrappedValue.toggle()
