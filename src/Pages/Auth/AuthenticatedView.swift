@@ -67,19 +67,7 @@ struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Un
           Text("You're not logged in.")
         }
       case .authenticated:
-        VStack {
-          content()
-          Text("You're logged in as \(viewModel.displayName).")
-          Button("Tap here to view your profile") {
-            presentingProfileScreen.toggle()
-          }
-        }
-        .sheet(isPresented: $presentingProfileScreen) {
-          NavigationStack {
-            UserProfileView()
-              .environmentObject(viewModel)
-          }
-        }
+        content()
       }
     }
     .sheet(isPresented: $presentingLoginScreen) {

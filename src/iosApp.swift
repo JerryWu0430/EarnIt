@@ -26,10 +26,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct iosApp: App {
+    @StateObject private var viewModel = AuthenticationViewModel()
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             ContentView()
+              .environmentObject(viewModel)
         }
     }
 }

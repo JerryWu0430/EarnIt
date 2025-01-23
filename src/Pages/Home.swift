@@ -19,7 +19,11 @@ struct Home: View {
                 
                 Spacer()
                 
-                NavigationButton(image: "gearshape.fill")
+                NavigationLink(destination: Settings()) {
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                }
             }.padding()
             
             HStack{

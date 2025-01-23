@@ -47,7 +47,6 @@
 		ED403E7E2D2F46A0008B6DC3 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E7D2D2F469C008B6DC3 /* AuthenticationViewModel.swift */; };
 		ED403E802D2F46A9008B6DC3 /* AuthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E7F2D2F46A4008B6DC3 /* AuthenticatedView.swift */; };
 		ED403E822D2F46B1008B6DC3 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */; };
-		ED403E842D2F46C2008B6DC3 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E832D2F46BE008B6DC3 /* UserProfileView.swift */; };
 		ED403E862D2F4791008B6DC3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E852D2F4791008B6DC3 /* FirebaseAnalytics */; };
 /* End PBXBuildFile section */
 
@@ -89,7 +88,6 @@
 		ED403E7D2D2F469C008B6DC3 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		ED403E7F2D2F46A4008B6DC3 /* AuthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedView.swift; sourceTree = "<group>"; };
 		ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
-		ED403E832D2F46BE008B6DC3 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +143,6 @@
 				ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */,
 				561B0E062CEB4392006A6143 /* Login.swift */,
 				561B0E082CEB465B006A6143 /* Register.swift */,
-				ED403E832D2F46BE008B6DC3 /* UserProfileView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -345,7 +342,6 @@
 				561B0E012CEB42AF006A6143 /* Onboarding_6.swift in Sources */,
 				561B0E142CEB54E9006A6143 /* Session.swift in Sources */,
 				ED403E822D2F46B1008B6DC3 /* AuthenticationView.swift in Sources */,
-				ED403E842D2F46C2008B6DC3 /* UserProfileView.swift in Sources */,
 				561B0DFD2CEB3DF6006A6143 /* Onboarding_4.swift in Sources */,
 				56CDAD8B2CF28FE800034896 /* Settings.swift in Sources */,
 				56B385782CE37EDD003F2CD4 /* Selectors.swift in Sources */,
