@@ -38,6 +38,7 @@ struct Register: View {
     private func signUpWithGoogle() {
         Task {
             if await viewModel.signInWithGoogle() == true {
+                viewModel.showOnboarding = true
                 rootIsPresented = false
             }
         }
@@ -47,10 +48,12 @@ struct Register: View {
         NavigationView {
             VStack(alignment: .leading){
                 HStack{
-                    CustomButton(buttonType: .arrow, arrowDirection: .left)
-                        .onTapGesture {
-                            dismiss()
-                        }
+                    Button(action: { 
+                        dismiss()
+                        viewModel.flow = .splash
+                    }) {
+                        CustomButton(buttonType: .arrow, arrowDirection: .left)
+                    }
                     Spacer()
                 }.padding(.leading)
                 
@@ -104,7 +107,7 @@ struct Register: View {
                 }.padding(.vertical)
                 
                 CustomButton(buttonType: .full, text: viewModel.authenticationState != .authenticating ? "Sign Up" : "Loading...")
-                    .disabled(!viewModel.isValid)
+                    .disabled(!viewModel.isValid || viewModel.authenticationState == .authenticating)
                     .onTapGesture {
                         signUpWithEmailPassword()
                     }
@@ -145,6 +148,11 @@ struct Register: View {
                 .hidden()
             }
             .analyticsScreen(name: "\(Self.self)")
+            .onChange(of: viewModel.authenticationState) { newState in
+                if newState == .pendingVerification {
+                    navigateToPendingVerification = true
+                }
+            }
         }
     }
 }

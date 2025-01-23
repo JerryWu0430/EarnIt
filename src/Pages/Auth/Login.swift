@@ -27,7 +27,7 @@ struct Login: View {
     private func signInWithEmailPassword() {
         Task {
             if await viewModel.signInWithEmailPassword() == true {
-                viewModel.authenticationState = .authenticated
+                print("Successfully signed in with email/password")
                 dismiss()
             }
         }
@@ -36,7 +36,7 @@ struct Login: View {
     private func signInWithGoogle() {
         Task {
             if await viewModel.signInWithGoogle() == true {
-                viewModel.authenticationState = .authenticated
+                print("Successfully signed in with Google")
                 dismiss()
             }
         }
@@ -53,7 +53,10 @@ struct Login: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Button(action: { dismiss() }) {
+                Button(action: { 
+                    dismiss()
+                    viewModel.flow = .splash
+                }) {
                     CustomButton(buttonType: .arrow, arrowDirection: .left)
                 }
                 Spacer()
@@ -116,7 +119,7 @@ struct Login: View {
             Button(action: signInWithEmailPassword) {
                 CustomButton(buttonType: .full, text: viewModel.authenticationState != .authenticating ? "Sign In" : "Loading...")
             }
-            .disabled(!viewModel.isValid)
+            .disabled(!viewModel.isValid || viewModel.authenticationState == .authenticating)
             .padding([.horizontal, .bottom])
             
             HStack {

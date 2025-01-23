@@ -15,6 +15,7 @@ enum AuthenticationState {
   case unauthenticated
   case authenticating
   case authenticated
+  case pendingVerification
 }
 
 enum AuthenticationFlow {
@@ -74,7 +75,15 @@ class AuthenticationViewModel: ObservableObject {
     if authStateHandler == nil {
       authStateHandler = Auth.auth().addStateDidChangeListener { auth, user in
         self.user = user
-        self.authenticationState = user == nil ? .unauthenticated : .authenticated
+        if let user = user {
+          if user.isEmailVerified || user.providerData.contains(where: { $0.providerID == "google.com" }) {
+            self.authenticationState = .authenticated
+          } else if self.authenticationState != .pendingVerification {
+            self.authenticationState = .authenticating
+          }
+        } else {
+          self.authenticationState = .unauthenticated
+        }
         self.displayName = user?.email ?? ""
       }
     }
@@ -107,6 +116,8 @@ class AuthenticationViewModel: ObservableObject {
       if Auth.auth().currentUser?.isEmailVerified == true {
         await MainActor.run {
           isEmailVerified = true
+          authenticationState = .authenticated
+          showOnboarding = true  // Set showOnboarding after email verification
         }
       }
     } catch {
@@ -182,8 +193,9 @@ extension AuthenticationViewModel {
   func signInWithEmailPassword() async -> Bool {
     authenticationState = .authenticating
     do {
-        try await Auth.auth().signIn(withEmail: self.email, password: self.password)
-        self.user = Auth.auth().currentUser
+        let result = try await Auth.auth().signIn(withEmail: self.email, password: self.password)
+        self.user = result.user
+        self.email = result.user.email ?? ""
         authenticationState = .authenticated
         checkOnboardingStatus()
         print("User signed in with email/password. State: \(authenticationState)")
@@ -201,8 +213,10 @@ extension AuthenticationViewModel {
     authenticationState = .authenticating
     do {
       let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+      self.user = authResult.user
       try await authResult.user.sendEmailVerification()
-      authenticationState = .authenticated
+      // Set state to pendingVerification
+      self.authenticationState = .pendingVerification
       return true
     } catch {
       print(error)
