@@ -14,7 +14,6 @@
 		561B0DFD2CEB3DF6006A6143 /* Onboarding_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B0DFC2CEB3DF6006A6143 /* Onboarding_4.swift */; };
 		561B0DFF2CEB4183006A6143 /* Onboarding_5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B0DFE2CEB4183006A6143 /* Onboarding_5.swift */; };
 		561B0E012CEB42AF006A6143 /* Onboarding_6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B0E002CEB42AF006A6143 /* Onboarding_6.swift */; };
-		561B0E042CEB4370006A6143 /* Onboarding_Orchestrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B0E032CEB4370006A6143 /* Onboarding_Orchestrator.swift */; };
 		561B0E072CEB4392006A6143 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B0E062CEB4392006A6143 /* Login.swift */; };
 		561B0E092CEB465C006A6143 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B0E082CEB465B006A6143 /* Register.swift */; };
 		561B0E0B2CEB4726006A6143 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B0E0A2CEB4726006A6143 /* Home.swift */; };
@@ -49,6 +48,7 @@
 		ED403E822D2F46B1008B6DC3 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */; };
 		ED403E862D2F4791008B6DC3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E852D2F4791008B6DC3 /* FirebaseAnalytics */; };
 		EDEFBCDD2D42C7D900F15B7A /* PendingVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCDC2D42C7D900F15B7A /* PendingVerificationView.swift */; };
+		EDEFBCF82D42F51800F15B7A /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,6 @@
 		561B0DFC2CEB3DF6006A6143 /* Onboarding_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_4.swift; sourceTree = "<group>"; };
 		561B0DFE2CEB4183006A6143 /* Onboarding_5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_5.swift; sourceTree = "<group>"; };
 		561B0E002CEB42AF006A6143 /* Onboarding_6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_6.swift; sourceTree = "<group>"; };
-		561B0E032CEB4370006A6143 /* Onboarding_Orchestrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding_Orchestrator.swift; sourceTree = "<group>"; };
 		561B0E062CEB4392006A6143 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		561B0E082CEB465B006A6143 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		561B0E0A2CEB4726006A6143 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		EDEFBCED2D42EB2600F15B7A /* dataconnect.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = dataconnect.yaml; sourceTree = "<group>"; };
 		EDEFBCEF2D42EB2600F15B7A /* DefaultConnector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DefaultConnector; sourceTree = "<group>"; };
 		EDEFBCF22D42EB2600F15B7A /* firebase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase.json; sourceTree = "<group>"; };
+		EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +130,7 @@
 				561B0E022CEB4361006A6143 /* Onboarding */,
 				561B0DF42CEB3440006A6143 /* Splash.swift */,
 				561B0E0A2CEB4726006A6143 /* Home.swift */,
+				EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */,
 				56CDAD8A2CF28FE800034896 /* Settings.swift */,
 				56CDADC72CF3208700034896 /* Quiz.swift */,
 			);
@@ -145,7 +146,6 @@
 				561B0DFC2CEB3DF6006A6143 /* Onboarding_4.swift */,
 				561B0DFE2CEB4183006A6143 /* Onboarding_5.swift */,
 				561B0E002CEB42AF006A6143 /* Onboarding_6.swift */,
-				561B0E032CEB4370006A6143 /* Onboarding_Orchestrator.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -418,6 +418,7 @@
 				561B0E0E2CEB5447006A6143 /* MarkdownObject.swift in Sources */,
 				561B0DF72CEB383B006A6143 /* Onboarding_1.swift in Sources */,
 				56B385672CE3719E003F2CD4 /* ContentView.swift in Sources */,
+				EDEFBCF82D42F51800F15B7A /* OnboardingFlow.swift in Sources */,
 				ED403E802D2F46A9008B6DC3 /* AuthenticatedView.swift in Sources */,
 				ED403E7E2D2F46A0008B6DC3 /* AuthenticationViewModel.swift in Sources */,
 				56B385652CE3719E003F2CD4 /* iosApp.swift in Sources */,
@@ -427,7 +428,6 @@
 				561B0E0B2CEB4726006A6143 /* Home.swift in Sources */,
 				56B385762CE37607003F2CD4 /* Extensions.swift in Sources */,
 				561B0DF92CEB3A1D006A6143 /* Onboarding_2.swift in Sources */,
-				561B0E042CEB4370006A6143 /* Onboarding_Orchestrator.swift in Sources */,
 				561B0E092CEB465C006A6143 /* Register.swift in Sources */,
 				561B0DF52CEB3440006A6143 /* Splash.swift in Sources */,
 				56CDAD892CF28A9300034896 /* Pin.swift in Sources */,

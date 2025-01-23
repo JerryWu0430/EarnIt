@@ -32,15 +32,17 @@ struct Onboarding_4: View {
                 .padding(.top)
                 .foregroundStyle(.white)
             
-            CustomButton(buttonType : .full, text: "Add Apps", invertedColor: true)
-                .padding([.horizontal, .top])
+            Button(action: { /* Add app selection logic */ }) {
+                CustomButton(buttonType: .full, text: "Add Apps", invertedColor: true)
+            }
+            .padding([.horizontal, .top])
             Spacer()
             
             HStack{
                 Paginations(totalCount: 5, currentIndex: .constant(3), paginationType: .onboarding, invertedColor: true)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right, invertedColor: true) {
-                    currentStep += 1
+                Button(action: { currentStep += 1 }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right, invertedColor: true)
                 }
             }.padding(.bottom).padding(.horizontal)
         }.background(Color.earnitAccent)

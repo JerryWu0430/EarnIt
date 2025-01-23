@@ -30,8 +30,8 @@ struct Onboarding_6: View {
                 .padding(.top)
                 .foregroundStyle(.white)
             
-            CustomButton(buttonType : .full, text: "Allow", invertedColor: true) {
-                currentStep += 1
+            Button(action: { currentStep += 1 }) {
+                CustomButton(buttonType: .full, text: "Allow", invertedColor: true)
             }
             .padding([.horizontal, .top])
             Spacer()
@@ -39,8 +39,8 @@ struct Onboarding_6: View {
             HStack{
                 Paginations(totalCount: 5, currentIndex: .constant(5), paginationType: .onboarding, invertedColor: true)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right, invertedColor: true) {
-                    currentStep += 1
+                Button(action: { currentStep += 1 }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right, invertedColor: true)
                 }
             }.padding(.bottom).padding(.horizontal)
         }.background(Color.earnitAccent)

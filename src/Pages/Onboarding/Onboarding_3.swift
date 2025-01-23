@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct Onboarding_3: View {
-    @State var name: String = ""
+    @State private var selectedSubject: String = "Maths"
     @Binding var currentStep: Int
     
+    private let subjects = ["Maths", "Biology", "Physics", "Chemistry"]
+    
     var body: some View {
-        VStack{
-            ZStack{
+        VStack {
+            ZStack {
                 Circle()
                     .frame(width: 302, height: 302)
                     .foregroundStyle(Color.earnitAccent.opacity(0.2))
-                VStack{
+                VStack {
                     Spacer()
                     Image("o3")
                 }.frame(width: 302, height: 302)
@@ -29,16 +31,19 @@ struct Onboarding_3: View {
                 .fontWeight(.bold)
                 .padding(.top)
             
-            OptionSelector(selectedOption: .constant("Maths"), options: ["2-6", "7-12", "12-16"], label: "Select an Option", whiteBackground: true)
+            OptionSelector(selectedOption: $selectedSubject, 
+                         options: subjects, 
+                         label: "Select a Subject", 
+                         whiteBackground: true)
                 .padding([.horizontal, .top])
             
             Spacer()
             
-            HStack{
+            HStack {
                 Paginations(totalCount: 5, currentIndex: .constant(2), paginationType: .onboarding)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right) {
-                    currentStep += 1
+                Button(action: { currentStep += 1 }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right)
                 }
             }.padding(.bottom).padding(.horizontal)
         }

@@ -28,6 +28,7 @@ class AuthenticationViewModel: ObservableObject {
   @Published var email: String = ""
   @Published var password: String = ""
   @Published var confirmPassword: String = ""
+  @Published var userName: String = ""
 
   @Published var flow: AuthenticationFlow = .splash {
     didSet {
@@ -43,6 +44,10 @@ class AuthenticationViewModel: ObservableObject {
   @Published var isEmailVerified = false
   @Published var showOnboarding = false
 
+  var userEmail: String {
+    return user?.email ?? email
+  }
+
   init() {
     print("Initial flow: \(flow)")
     registerAuthStateHandler()
@@ -57,6 +62,10 @@ class AuthenticationViewModel: ObservableObject {
       .assign(to: &$isValid)
 
     self.user = Auth.auth().currentUser
+    if self.user != nil {
+      // Check onboarding status for existing users
+      checkOnboardingStatus()
+    }
   }
 
   private var authStateHandler: AuthStateDidChangeListenerHandle?
@@ -135,15 +144,37 @@ class AuthenticationViewModel: ObservableObject {
     do {
       try Auth.auth().signOut()
       self.user = nil
+      self.showOnboarding = false  // Reset onboarding status
+      self.authenticationState = .unauthenticated
+      self.userName = ""  // Clear the user name
+      UserDefaults.standard.removeObject(forKey: "userName")  // Clear stored name
     } catch {
       print(error)
     }
   }
 
   func checkOnboardingStatus() {
+    // Load the user name if it exists
+    loadUserName()
+    
     // TODO: Replace with actual check from your backend/Firestore
-    // For now, we'll assume all users need onboarding
-    self.showOnboarding = true
+    // For now, we'll assume all users need onboarding if they don't have a name
+    self.showOnboarding = userName.isEmpty
+  }
+
+  func updateUserName(_ name: String) {
+    self.userName = name
+    self.displayName = name  // Update display name to show in UI
+    
+    // Store the name in UserDefaults for persistence
+    UserDefaults.standard.set(name, forKey: "userName")
+  }
+
+  func loadUserName() {
+    if let savedName = UserDefaults.standard.string(forKey: "userName") {
+      self.userName = savedName
+      self.displayName = savedName
+    }
   }
 }
 
@@ -151,16 +182,18 @@ extension AuthenticationViewModel {
   func signInWithEmailPassword() async -> Bool {
     authenticationState = .authenticating
     do {
-      try await Auth.auth().signIn(withEmail: self.email, password: self.password)
-      authenticationState = .authenticated
-      print("User signed in with email/password. State: \(authenticationState)")
-      return true
+        try await Auth.auth().signIn(withEmail: self.email, password: self.password)
+        self.user = Auth.auth().currentUser
+        authenticationState = .authenticated
+        checkOnboardingStatus()
+        print("User signed in with email/password. State: \(authenticationState)")
+        return true
     }
-    catch  {
-      print(error)
-      errorMessage = error.localizedDescription
-      authenticationState = .unauthenticated
-      return false
+    catch {
+        print(error)
+        errorMessage = error.localizedDescription
+        authenticationState = .unauthenticated
+        return false
     }
   }
 
@@ -198,7 +231,7 @@ enum AuthenticationError: Error {
 extension AuthenticationViewModel {
   func signInWithGoogle() async -> Bool {
     guard let clientID = FirebaseApp.app()?.options.clientID else {
-      fatalError("No client ID found in Firebase configuration")
+        fatalError("No client ID found in Firebase configuration")
     }
     let config = GIDConfiguration(clientID: clientID)
     GIDSignIn.sharedInstance.configuration = config
@@ -206,11 +239,12 @@ extension AuthenticationViewModel {
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
           let window = windowScene.windows.first,
           let rootViewController = window.rootViewController else {
-      print("There is no root view controller!")
-      return false
+        print("There is no root view controller!")
+        return false
     }
 
-      do {
+    do {
+        authenticationState = .authenticating
         let userAuthentication = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
 
         let user = userAuthentication.user
@@ -218,20 +252,25 @@ extension AuthenticationViewModel {
         let accessToken = user.accessToken
 
         let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString,
-                                                       accessToken: accessToken.tokenString)
+                                                   accessToken: accessToken.tokenString)
 
         let result = try await Auth.auth().signIn(with: credential)
-        let firebaseUser = result.user
-        print("User \(firebaseUser.uid) signed in with email \(firebaseUser.email ?? "unknown")")
-        authenticationState = .authenticated
-        isEmailVerified = true
+        await MainActor.run {
+            self.user = result.user
+            self.email = result.user.email ?? ""
+            self.displayName = result.user.displayName ?? ""
+            self.authenticationState = .authenticated
+            self.errorMessage = ""
+            checkOnboardingStatus()
+        }
         return true
-      }
-      catch {
+    }
+    catch {
         print(error.localizedDescription)
         self.errorMessage = error.localizedDescription
+        authenticationState = .unauthenticated
         return false
-      }
+    }
   }
 }
 

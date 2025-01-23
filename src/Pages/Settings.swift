@@ -12,111 +12,91 @@ struct Settings: View {
     @EnvironmentObject var viewModel: AuthenticationViewModel
     @Environment(\.dismiss) var dismiss
     @State private var presentingConfirmationDialog = false
+    @State private var notificationsEnabled = false
+    @State private var screenTimeEnabled = true
 
     var body: some View {
-        ZStack{
-                VStack{
-                    HStack{
-                        CustomButton(buttonType: .arrow, arrowDirection: .left, variant: .small)
-                            .onTapGesture {
-                                dismiss()
+        NavigationView {
+            ZStack {
+                Color(.systemGroupedBackground)
+                    .ignoresSafeArea()
+                
+                VStack {
+                    // Profile Section
+                    VStack(alignment: .center) {
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .foregroundColor(.gray)
+                            .padding(.top)
+                        
+                        Text(viewModel.userName)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Text(viewModel.userEmail)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color(.systemBackground))
+                    
+                    // Settings List
+                    List {
+                        Section(header: Text("App Settings")) {
+                            NavigationLink(destination: Text("Profile Settings")) {
+                                ListRow(image: Image(systemName: "person.fill"), 
+                                      text: "Profile", 
+                                      content: { EmptyView() }(), 
+                                      color: .blue)
                             }
-                        Spacer()
-                    }.padding()
-                    Spacer()
-                }
-                VStack(alignment: .center){
-                    VStack {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "person.fill")
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(Circle())
-                                .clipped()
-                                .padding(4)
-                                .overlay(Circle().stroke(Color.accentColor, lineWidth: 2))
-                            Spacer()
+                            
+                            Toggle(isOn: $notificationsEnabled) {
+                                ListRow(image: Image(systemName: "bell.fill"), 
+                                      text: "Notifications", 
+                                      content: { EmptyView() }(), 
+                                      color: .red)
+                            }
+                            
+                            Toggle(isOn: $screenTimeEnabled) {
+                                ListRow(image: Image(systemName: "timer"), 
+                                      text: "Screen Time", 
+                                      content: { EmptyView() }(), 
+                                      color: .purple)
+                            }
                         }
-                        Button(action: {}) {
-                            Text("Edit")
+                        
+                        Section(header: Text("Account")) {
+                            Button(action: signOut) {
+                                HStack {
+                                    Text("Sign Out")
+                                        .foregroundColor(.red)
+                                    Spacer()
+                                }
+                            }
+                            
+                            Button(action: { presentingConfirmationDialog.toggle() }) {
+                                HStack {
+                                    Text("Delete Account")
+                                        .foregroundColor(.red)
+                                    Spacer()
+                                }
+                            }
                         }
                     }
-                    Text("Jerry Wu") //change for the username
-                        .font(.title)
-                        .fontWeight(.bold)
-                    Text(viewModel.displayName)
-                        .font(.callout)
-                        .foregroundStyle(.gray)
-                    
-                    CustomButton(buttonType: .full, text: "Edit Details")
-                        .padding()
-                    
-                    VStack{
-                        ListRow(image: Image(systemName: "gearshape.fill"), text: "Settings", content: {
-                            Button(action: {
-                                // Action here
-                            }, label: {
-                                Image(systemName: "arrow.right")
-                            })
-                        }(), color: Color.blue).padding(5)
-                        Divider()
-                        ListRow(image: Image(systemName: "gearshape.fill"), text: "Settings", content: {
-                            Toggle("", isOn: .constant(false))
-                        }(), color: Color.blue).padding(5)
-                        Divider()
-                        ListRow(image: Image(systemName: "gearshape.fill"), text: "Settings", content: {
-                            Button(action: {
-                                // Action here
-                            }, label: {
-                                Image(systemName: "arrow.right")
-                            })
-                        }(), color: Color.blue, notifications: 10).padding(5)
-                        Divider()
-                        ListRow(image: Image(systemName: "gearshape.fill"), text: "Settings", content: {
-                            Button(action: {
-                                // Action here
-                            }, label: {
-                                Image(systemName: "arrow.right")
-                            })
-                        }(), color: Color.blue, notifications: 10).padding(5)
-                        Divider()
-                        ListRow(image: Image(systemName: "gearshape.fill"), text: "Settings", content: {
-                            Button(action: {
-                                // Action here
-                            }, label: {
-                                Image(systemName: "arrow.right")
-                            })
-                        }(), color: Color.blue, notifications: 10).padding(5)
-                        Divider()
-                        Spacer()
-                    }.padding()
-                     .background(.white)
-                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                     .shadow(color: .gray.opacity(0.15), radius: 10, y: 1)
-                     .padding(.horizontal)
-
-                     HStack{
-                        Button(action: signOut) {
-                            CustomButton(buttonType: .full, text: "Sign out")
-                        }
-                        .padding()
-
-                        Button(action: { presentingConfirmationDialog.toggle() }) {
-                            CustomButton(buttonType: .full, text: "Delete Account")
-                        }
-                        .padding()
-
-                        .confirmationDialog("Deleting your account is permanent. Do you want to delete your account?",
-                                            isPresented: $presentingConfirmationDialog, titleVisibility: .visible) {
-                            Button("Delete Account", role: .destructive, action: deleteAccount)
-                            Button("Cancel", role: .cancel, action: { })
-                        }
-                     }
-                    
+                    .listStyle(InsetGroupedListStyle())
                 }
-                
+            }
+            .navigationBarItems(leading: Button(action: { dismiss() }) {
+                CustomButton(buttonType: .arrow, arrowDirection: .left, variant: .small)
+            })
+            .navigationBarTitle("Settings", displayMode: .inline)
+            .confirmationDialog("Deleting your account is permanent. Do you want to delete your account?",
+                              isPresented: $presentingConfirmationDialog,
+                              titleVisibility: .visible) {
+                Button("Delete Account", role: .destructive, action: deleteAccount)
+                Button("Cancel", role: .cancel, action: {})
+            }
         }
     }
 
@@ -127,14 +107,14 @@ struct Settings: View {
 
     private func deleteAccount() {
         Task {
-        if await viewModel.deleteAccount() == true {
-            dismiss()
+            if await viewModel.deleteAccount() == true {
+                dismiss()
+            }
         }
-    }
-        
     }
 }
 
 #Preview {
     Settings()
+        .environmentObject(AuthenticationViewModel())
 }

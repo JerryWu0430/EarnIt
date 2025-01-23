@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import FirebaseAuth
 
 private struct PresentingLoginScreenKey: EnvironmentKey {
     static let defaultValue: Bool = false
@@ -28,61 +29,35 @@ extension EnvironmentValues {
     }
 }
 
-extension AuthenticatedView where Unauthenticated == EmptyView {
-  init(@ViewBuilder content: @escaping () -> Content) {
-    self.unauthenticated = nil
-    self.content = content
-  }
-}
-
-struct AuthenticatedView<Content, Unauthenticated>: View where Content: View, Unauthenticated: View {
+struct AuthenticatedView<Content: View>: View {
     @EnvironmentObject var viewModel: AuthenticationViewModel
-    @State private var presentingLoginScreen = false
-
-    var unauthenticated: Unauthenticated?
     @ViewBuilder var content: () -> Content
-
-    public init(unauthenticated: Unauthenticated?, @ViewBuilder content: @escaping () -> Content) {
+    let unauthenticated: () -> AnyView
+    
+    init(content: @escaping () -> Content, unauthenticated: @escaping () -> AnyView) {
+        self.content = content
         self.unauthenticated = unauthenticated
-        self.content = content
     }
-
-    public init(@ViewBuilder unauthenticated: @escaping () -> Unauthenticated, @ViewBuilder content: @escaping () -> Content) {
-        self.unauthenticated = unauthenticated()
-        self.content = content
-    }
-
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                switch viewModel.authenticationState {
-                case .unauthenticated, .authenticating:
-                    if let unauthenticated = unauthenticated {
-                        AnyView(unauthenticated)
-                    } else {
-                        Text("You're not logged in.")
-                    }
-                case .authenticated:
-                    content()
-                }
+        if let _ = viewModel.user {
+            if viewModel.showOnboarding {
+                OnboardingFlow()
+            } else {
+                content()
             }
-            .sheet(isPresented: $presentingLoginScreen) {
-                AuthenticationView(isPresented: $presentingLoginScreen)
-                    .environmentObject(viewModel)
-            }
+        } else {
+            unauthenticated()
         }
-        .environment(\.presentingLoginScreen, presentingLoginScreen)
-        .environment(\.presentingLoginScreenBinding, $presentingLoginScreen)
     }
 }
 
 struct AuthenticatedView_Previews: PreviewProvider {
     static var previews: some View {
-        AuthenticatedView {
-            Text("You're signed in.")
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                .background(.yellow)
-        }
+        AuthenticatedView(
+            content: { Text("You're signed in.") },
+            unauthenticated: { AnyView(Text("You're not signed in.")) }
+        )
         .environmentObject(AuthenticationViewModel())
     }
 }

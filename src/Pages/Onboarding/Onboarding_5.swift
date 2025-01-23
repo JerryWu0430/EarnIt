@@ -27,8 +27,8 @@ struct Onboarding_5: View {
             HStack{
                 Paginations(totalCount: 5, currentIndex: .constant(4), paginationType: .onboarding)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right) {
-                    currentStep += 1
+                Button(action: { currentStep += 1 }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right)
                 }
             }.padding(.bottom).padding(.horizontal)
         }

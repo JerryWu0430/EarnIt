@@ -10,6 +10,7 @@ import SwiftUI
 struct Onboarding_1: View {
     @State var name: String = ""
     @Binding var currentStep: Int
+    @EnvironmentObject var viewModel: AuthenticationViewModel
     
     var body: some View {
         VStack{
@@ -36,8 +37,13 @@ struct Onboarding_1: View {
             HStack{
                 Paginations(totalCount: 5, currentIndex: .constant(1), paginationType: .onboarding)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right) {
-                    currentStep += 1
+                Button(action: {
+                    if !name.isEmpty {
+                        viewModel.updateUserName(name)
+                        currentStep += 1
+                    }
+                }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right)
                 }
             }.padding(.bottom).padding(.horizontal)
         }
@@ -46,4 +52,5 @@ struct Onboarding_1: View {
 
 #Preview {
     Onboarding_1(currentStep: .constant(1))
+        .environmentObject(AuthenticationViewModel())
 }

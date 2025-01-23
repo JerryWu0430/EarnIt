@@ -9,48 +9,61 @@ import SwiftUI
 
 struct Splash: View {
     @EnvironmentObject var viewModel: AuthenticationViewModel
-    @Environment(\.presentingLoginScreenBinding) var presentingLoginScreen
+    @State private var showingLogin = false
+    @State private var showingRegister = false
     
     var body: some View {
-        print("Splash view initialized")
-        return VStack {
-            Spacer()
-            Circle()
-                .frame(width: 200, height: 185)
-                .foregroundStyle(Color.earnitAccent)
-                .overlay(content: {
-                    Image("logo")
-                }).padding(.bottom)
-            
-            Text("EarnIt!")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundStyle(Color.earnitAccent)
-            Text("Learn to Earn")
-            
-            Spacer()
-            
-            CustomButton(buttonType: .full, text: "Get Started")
-                .onTapGesture {
+        NavigationView {
+            VStack {
+                Spacer()
+                Circle()
+                    .frame(width: 200, height: 185)
+                    .foregroundStyle(Color.earnitAccent)
+                    .overlay(content: {
+                        Image("logo")
+                    }).padding(.bottom)
+                
+                Text("EarnIt!")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.earnitAccent)
+                Text("Learn to Earn")
+                
+                Spacer()
+                
+                NavigationLink(destination: Register(rootIsPresented: .constant(false)), isActive: $showingRegister) {
+                    EmptyView()
+                }
+                
+                NavigationLink(destination: Login(), isActive: $showingLogin) {
+                    EmptyView()
+                }
+                
+                Button(action: {
                     print("Get Started tapped")
                     viewModel.flow = .register
                     viewModel.reset()
-                    presentingLoginScreen.wrappedValue.toggle()
+                    showingRegister = true
+                }) {
+                    CustomButton(buttonType: .full, text: "Get Started")
                 }
                 .padding(.horizontal)
-            
-            CustomButton(buttonType: .outline, text: "Already Have an Account")
-                .onTapGesture {
+                
+                Button(action: {
                     print("Already Have an Account tapped")
                     viewModel.flow = .login
                     viewModel.reset()
-                    presentingLoginScreen.wrappedValue.toggle()
+                    showingLogin = true
+                }) {
+                    CustomButton(buttonType: .outline, text: "Already Have an Account")
                 }
                 .padding(.horizontal)
+            }
         }
     }
 }
 
 #Preview {
     Splash()
+        .environmentObject(AuthenticationViewModel())
 }
