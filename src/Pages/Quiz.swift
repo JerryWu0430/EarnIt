@@ -20,7 +20,7 @@ struct Quiz: View {
     @State private var questions: [Question] = []
     @State private var currentQuestionIndex: Int = 0
     @State private var correctAnswers: Int = 0
-    @State private var timeRemaining: Int = 300 // 5 minutes in seconds
+    @State private var timeRemaining: Int = 300 
     @State private var timer: Timer? = nil
     @State private var showingResult = false
     

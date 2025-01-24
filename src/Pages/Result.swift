@@ -5,6 +5,7 @@ struct Result: View {
     let totalQuestions: Int
     let earnedMinutes: Int
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var timeManager: TimeManager
     
     var body: some View {
         VStack {
@@ -43,7 +44,7 @@ struct Result: View {
                 .fontWeight(.bold)
                 .padding(.top)
             
-            Text("Congratulation you earned \(earnedMinutes) more\nminutes of screen time. Now your\nupdated screen time is \(7) minutes")
+            Text("Congratulation you earned \(earnedMinutes) more\nminutes of screen time. Now your\nupdated screen time is \(timeManager.timeLeft) minutes")
                 .multilineTextAlignment(.center)
                 .padding(.top, 5)
             

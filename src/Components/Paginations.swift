@@ -35,8 +35,9 @@ fileprivate struct QuizPagination: View {
     private var progressWidth: CGFloat {
         guard totalCount > 0 else { return 0 }
         let screenWidth = UIScreen.main.bounds.width - 32 // Account for padding
-        let progress = CGFloat(currentIndex - 1) / CGFloat(totalCount) // Subtract 1 since currentIndex is 1-based
-        return max(0, min(screenWidth, progress * screenWidth)) // Clamp between 0 and screenWidth
+        // Progress is based on completed questions (currentIndex - 1)
+        let answeredQuestions = max(0, currentIndex - 1)
+        return (CGFloat(answeredQuestions) / CGFloat(totalCount)) * screenWidth
     }
     
     var body: some View {
@@ -45,7 +46,7 @@ fileprivate struct QuizPagination: View {
                 .frame(height: 8)
                 .foregroundStyle(Color(hex: "#D9D9D9"))
             
-            if totalCount > 0 && currentIndex > 0 {
+            if totalCount > 0 {
                 Capsule()
                     .frame(width: progressWidth, height: 8)
                     .foregroundStyle(Color(hex: "#FD6854"))
@@ -60,7 +61,7 @@ fileprivate struct QuizPagination: View {
                             .font(.caption)
                             .fontWeight(.bold)
                     )
-                    .offset(x: max(19, min(progressWidth - 19, UIScreen.main.bounds.width - 70))) // Ensure star stays within bounds
+                    .offset(x: progressWidth - 19) // Center the star on the progress bar
             }
         }
         .padding(.horizontal)
