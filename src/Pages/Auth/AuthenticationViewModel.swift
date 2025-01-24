@@ -111,17 +111,22 @@ class AuthenticationViewModel: ObservableObject {
   }
 
   func checkEmailVerification() async {
+    print("📧 Checking email verification...")
     do {
       try await Auth.auth().currentUser?.reload()
       if Auth.auth().currentUser?.isEmailVerified == true {
+        print("✅ Email is verified")
         await MainActor.run {
           isEmailVerified = true
           authenticationState = .authenticated
-          showOnboarding = true  // Set showOnboarding after email verification
+          print("⚠️ Setting showOnboarding to true in checkEmailVerification")
+          showOnboarding = true  // This might be the issue!
         }
+      } else {
+        print("❌ Email is not verified")
       }
     } catch {
-      print("Error reloading user: \(error)")
+      print("❌ Error reloading user: \(error)")
     }
   }
 
@@ -152,57 +157,78 @@ class AuthenticationViewModel: ObservableObject {
   }
 
   func signOut() {
+    print("🚪 Starting sign out process...")
     do {
       try Auth.auth().signOut()
+      print("✅ Firebase sign out successful")
       self.user = nil
+      print("📱 Current UserDefaults username: \(UserDefaults.standard.string(forKey: "userName") ?? "nil")")
       self.showOnboarding = false  // Reset onboarding status
       self.authenticationState = .unauthenticated
-      self.userName = ""  // Clear the user name
-      UserDefaults.standard.removeObject(forKey: "userName")  // Clear stored name
+      self.userName = ""  // Clear the temporary user name
+      print("🎯 Final state - showOnboarding: \(showOnboarding), authState: \(authenticationState)")
     } catch {
-      print(error)
+      print("❌ Sign out error: \(error)")
     }
   }
 
   func checkOnboardingStatus() {
+    print("🔍 Checking onboarding status...")
     // Load the user name if it exists
     loadUserName()
     
-    // TODO: Replace with actual check from your backend/Firestore
-    // For now, we'll assume all users need onboarding if they don't have a name
-    self.showOnboarding = userName.isEmpty
+    print("📝 Current userName: \(userName)")
+    print("🔑 UserDefaults userName: \(UserDefaults.standard.string(forKey: "userName") ?? "nil")")
+    
+    // Check if the user has completed onboarding by checking UserDefaults
+    if let savedName = UserDefaults.standard.string(forKey: "userName") {
+        print("✅ Found saved username: \(savedName), setting showOnboarding to false")
+        self.showOnboarding = false
+    } else {
+        print("❌ No saved username found, setting showOnboarding to true")
+        self.showOnboarding = true
+    }
+    print("🎯 Final showOnboarding state: \(showOnboarding)")
   }
 
   func updateUserName(_ name: String) {
+    print("📝 Updating username to: \(name)")
     self.userName = name
     self.displayName = name  // Update display name to show in UI
     
     // Store the name in UserDefaults for persistence
     UserDefaults.standard.set(name, forKey: "userName")
+    print("💾 Saved username to UserDefaults")
   }
 
   func loadUserName() {
+    print("📥 Loading username from UserDefaults...")
     if let savedName = UserDefaults.standard.string(forKey: "userName") {
+      print("✅ Found saved username: \(savedName)")
       self.userName = savedName
       self.displayName = savedName
+    } else {
+      print("❌ No username found in UserDefaults")
     }
   }
 }
 
 extension AuthenticationViewModel {
   func signInWithEmailPassword() async -> Bool {
+    print("🔑 Starting email/password sign in...")
     authenticationState = .authenticating
     do {
         let result = try await Auth.auth().signIn(withEmail: self.email, password: self.password)
         self.user = result.user
         self.email = result.user.email ?? ""
         authenticationState = .authenticated
+        print("✅ Sign in successful, checking onboarding status...")
         checkOnboardingStatus()
-        print("User signed in with email/password. State: \(authenticationState)")
+        print("🎯 Final state after sign in - showOnboarding: \(showOnboarding), authState: \(authenticationState)")
         return true
     }
     catch {
-        print(error)
+        print("❌ Sign in error: \(error)")
         errorMessage = error.localizedDescription
         authenticationState = .unauthenticated
         return false
@@ -244,31 +270,44 @@ enum AuthenticationError: Error {
 
 extension AuthenticationViewModel {
   func signInWithGoogle() async -> Bool {
+    authenticationState = .authenticating  // Set state to authenticating at start
+    
     guard let clientID = FirebaseApp.app()?.options.clientID else {
-        fatalError("No client ID found in Firebase configuration")
+        print("Error: No client ID found in Firebase configuration")
+        authenticationState = .unauthenticated
+        errorMessage = "Firebase configuration error"
+        return false
     }
+    
     let config = GIDConfiguration(clientID: clientID)
     GIDSignIn.sharedInstance.configuration = config
 
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
           let window = windowScene.windows.first,
           let rootViewController = window.rootViewController else {
-        print("There is no root view controller!")
+        print("Error: No root view controller found")
+        authenticationState = .unauthenticated
+        errorMessage = "Internal error: Cannot present sign-in screen"
         return false
     }
 
     do {
-        authenticationState = .authenticating
+        print("Starting Google sign in flow...")
         let userAuthentication = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
-
-        let user = userAuthentication.user
-        guard let idToken = user.idToken else { throw AuthenticationError.tokenError(message: "ID token missing") }
-        let accessToken = user.accessToken
-
-        let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString,
-                                                   accessToken: accessToken.tokenString)
-
+        print("Got Google authentication response")
+        
+        guard let idToken = userAuthentication.user.idToken?.tokenString else {
+            print("Error: ID token missing from Google response")
+            throw AuthenticationError.tokenError(message: "ID token missing")
+        }
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                     accessToken: userAuthentication.user.accessToken.tokenString)
+        
+        print("Authenticating with Firebase...")
         let result = try await Auth.auth().signIn(with: credential)
+        print("Successfully signed in with Firebase")
+        
         await MainActor.run {
             self.user = result.user
             self.email = result.user.email ?? ""
@@ -278,11 +317,12 @@ extension AuthenticationViewModel {
             checkOnboardingStatus()
         }
         return true
-    }
-    catch {
-        print(error.localizedDescription)
-        self.errorMessage = error.localizedDescription
-        authenticationState = .unauthenticated
+    } catch {
+        print("Google sign in error: \(error)")
+        await MainActor.run {
+            self.errorMessage = error.localizedDescription
+            self.authenticationState = .unauthenticated
+        }
         return false
     }
   }

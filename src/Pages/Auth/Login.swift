@@ -108,7 +108,11 @@ struct Login: View {
                 Button("Cancel", role: .cancel) { }
                 Button(isResettingPassword ? "Sending..." : "Reset") {
                     if !isResettingPassword {
-                        resetPassword()
+                        Task {
+                            if await viewModel.resetPassword() {
+                                showingForgotPasswordAlert = false
+                            }
+                        }
                     }
                 }
                 .disabled(viewModel.email.isEmpty || isResettingPassword)
@@ -134,8 +138,13 @@ struct Login: View {
                     .frame(height:1)
             }.padding(.horizontal)
             
-            Button(action: signInWithGoogle) {
-                SocialButton(buttonType: .Google, text: "Sign in with google")
+            SocialButton(buttonType: .Google, text: "Sign in with google") {
+                Task {
+                    if await viewModel.signInWithGoogle() == true {
+                        print("Successfully signed in with Google")
+                        dismiss()
+                    }
+                }
             }
             .padding()
             
@@ -144,13 +153,14 @@ struct Login: View {
             HStack {
                 Spacer()
                 Text("Don't have an account? ")
-                NavigationLink(destination: Register(rootIsPresented: .constant(false))) {
+                Button(action: { viewModel.switchFlow() }) {
                     Text("Sign Up")
                         .fontWeight(.bold)
                 }
                 Spacer()
             }
         }
+        .navigationBarHidden(true)
         .analyticsScreen(name: "\(Self.self)")
     }
 }
