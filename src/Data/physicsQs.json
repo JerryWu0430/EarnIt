@@ -1,0 +1,366 @@
+[
+    {
+        "question": "What is the speed of light?",
+        "options": [
+            "300,000 km/s",
+            "150,000 km/s", 
+            "100,000 km/s",
+            "200,000 km/s",
+            "250,000 km/s"
+        ],
+        "correct_answer": "300,000 km/s",
+        "subject": "Physics",
+        "sub_topic": "Optics",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the unit of force?",
+        "options": [
+            "Joule",
+            "Newton",
+            "Watt", 
+            "Pascal",
+            "Volt"
+        ],
+        "correct_answer": "Newton",
+        "subject": "Physics",
+        "sub_topic": "Mechanics",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the SI unit of electric current?",
+        "options": [
+            "Ampere",
+            "Volt",
+            "Ohm",
+            "Watt",
+            "Coulomb"
+        ],
+        "correct_answer": "Ampere",
+        "subject": "Physics",
+        "sub_topic": "Electricity",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the acceleration due to gravity on Earth?",
+        "options": [
+            "9.8 m/s²",
+            "8.9 m/s²",
+            "10.2 m/s²",
+            "7.8 m/s²",
+            "11.2 m/s²"
+        ],
+        "correct_answer": "9.8 m/s²",
+        "subject": "Physics",
+        "sub_topic": "Mechanics",
+        "difficulty": 1
+    },
+    {
+        "question": "Which law states that energy cannot be created or destroyed?",
+        "options": [
+            "Law of Conservation of Energy",
+            "Newton's First Law",
+            "Ohm's Law",
+            "Boyle's Law",
+            "Hooke's Law"
+        ],
+        "correct_answer": "Law of Conservation of Energy",
+        "subject": "Physics",
+        "sub_topic": "Energy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the unit of electrical resistance?",
+        "options": [
+            "Ohm",
+            "Volt",
+            "Ampere",
+            "Watt",
+            "Joule"
+        ],
+        "correct_answer": "Ohm",
+        "subject": "Physics",
+        "sub_topic": "Electricity",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the formula for kinetic energy?",
+        "options": [
+            "½mv²",
+            "mgh",
+            "F=ma",
+            "E=mc²",
+            "P=mv"
+        ],
+        "correct_answer": "½mv²",
+        "subject": "Physics",
+        "sub_topic": "Energy",
+        "difficulty": 2
+    },
+    {
+        "question": "What type of waves are sound waves?",
+        "options": [
+            "Longitudinal waves",
+            "Transverse waves",
+            "Electromagnetic waves",
+            "Surface waves",
+            "Radio waves"
+        ],
+        "correct_answer": "Longitudinal waves",
+        "subject": "Physics",
+        "sub_topic": "Waves",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the SI unit of pressure?",
+        "options": [
+            "Pascal",
+            "Newton",
+            "Bar",
+            "Atmosphere",
+            "PSI"
+        ],
+        "correct_answer": "Pascal",
+        "subject": "Physics",
+        "sub_topic": "Mechanics",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the formula for work done?",
+        "options": [
+            "Force × Distance",
+            "Mass × Acceleration",
+            "Mass × Velocity",
+            "Force × Time",
+            "Power × Time"
+        ],
+        "correct_answer": "Force × Distance",
+        "subject": "Physics",
+        "sub_topic": "Work and Energy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the unit of power?",
+        "options": [
+            "Watt",
+            "Joule",
+            "Newton",
+            "Pascal",
+            "Volt"
+        ],
+        "correct_answer": "Watt",
+        "subject": "Physics",
+        "sub_topic": "Energy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the principle behind a simple lever?",
+        "options": [
+            "Moment of force",
+            "Conservation of energy",
+            "Newton's third law",
+            "Bernoulli's principle",
+            "Archimedes principle"
+        ],
+        "correct_answer": "Moment of force",
+        "subject": "Physics",
+        "sub_topic": "Simple Machines",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the SI unit of frequency?",
+        "options": [
+            "Hertz",
+            "Second",
+            "Meter",
+            "Decibel",
+            "Wavelength"
+        ],
+        "correct_answer": "Hertz",
+        "subject": "Physics",
+        "sub_topic": "Waves",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the formula for density?",
+        "options": [
+            "Mass/Volume",
+            "Mass × Volume",
+            "Weight/Volume",
+            "Mass/Weight",
+            "Weight × Volume"
+        ],
+        "correct_answer": "Mass/Volume",
+        "subject": "Physics",
+        "sub_topic": "Properties of Matter",
+        "difficulty": 1
+    },
+    {
+        "question": "Which color of light has the highest frequency?",
+        "options": [
+            "Violet",
+            "Blue",
+            "Green",
+            "Yellow",
+            "Red"
+        ],
+        "correct_answer": "Violet",
+        "subject": "Physics",
+        "sub_topic": "Optics",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the SI unit of temperature?",
+        "options": [
+            "Kelvin",
+            "Celsius",
+            "Fahrenheit",
+            "Rankine",
+            "Réaumur"
+        ],
+        "correct_answer": "Kelvin",
+        "subject": "Physics",
+        "sub_topic": "Thermodynamics",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the principle of conservation of momentum?",
+        "options": [
+            "Total momentum remains constant in a closed system",
+            "Momentum always increases",
+            "Momentum always decreases",
+            "Momentum equals mass times acceleration",
+            "Momentum is independent of mass"
+        ],
+        "correct_answer": "Total momentum remains constant in a closed system",
+        "subject": "Physics",
+        "sub_topic": "Mechanics",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the unit of electric potential difference?",
+        "options": [
+            "Volt",
+            "Ampere",
+            "Ohm",
+            "Watt",
+            "Joule"
+        ],
+        "correct_answer": "Volt",
+        "subject": "Physics",
+        "sub_topic": "Electricity",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the speed of sound in air at room temperature?",
+        "options": [
+            "343 m/s",
+            "300 m/s",
+            "400 m/s",
+            "250 m/s",
+            "500 m/s"
+        ],
+        "correct_answer": "343 m/s",
+        "subject": "Physics",
+        "sub_topic": "Waves",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the formula for potential energy?",
+        "options": [
+            "mgh",
+            "½mv²",
+            "F=ma",
+            "E=mc²",
+            "P=mv"
+        ],
+        "correct_answer": "mgh",
+        "subject": "Physics",
+        "sub_topic": "Energy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the SI unit of magnetic field strength?",
+        "options": [
+            "Tesla",
+            "Weber",
+            "Henry",
+            "Gauss",
+            "Oersted"
+        ],
+        "correct_answer": "Tesla",
+        "subject": "Physics",
+        "sub_topic": "Magnetism",
+        "difficulty": 2
+    },
+    {
+        "question": "What is Newton's First Law of Motion?",
+        "options": [
+            "An object remains at rest or in motion unless acted upon by a force",
+            "Force equals mass times acceleration",
+            "For every action there is an equal and opposite reaction",
+            "Energy cannot be created or destroyed",
+            "Objects attract each other with gravitational force"
+        ],
+        "correct_answer": "An object remains at rest or in motion unless acted upon by a force",
+        "subject": "Physics",
+        "sub_topic": "Mechanics",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the unit of capacitance?",
+        "options": [
+            "Farad",
+            "Henry",
+            "Ohm",
+            "Coulomb",
+            "Weber"
+        ],
+        "correct_answer": "Farad",
+        "subject": "Physics",
+        "sub_topic": "Electricity",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the relationship between wavelength and frequency?",
+        "options": [
+            "Wave speed = wavelength × frequency",
+            "Wave speed = wavelength ÷ frequency",
+            "Wave speed = frequency ÷ wavelength",
+            "Wavelength = frequency",
+            "Frequency = wave speed"
+        ],
+        "correct_answer": "Wave speed = wavelength × frequency",
+        "subject": "Physics",
+        "sub_topic": "Waves",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the SI unit of energy?",
+        "options": [
+            "Joule",
+            "Watt",
+            "Newton",
+            "Pascal",
+            "Calorie"
+        ],
+        "correct_answer": "Joule",
+        "subject": "Physics",
+        "sub_topic": "Energy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is Ohm's Law?",
+        "options": [
+            "V = IR",
+            "P = VI",
+            "F = ma",
+            "E = mc²",
+            "PV = nRT"
+        ],
+        "correct_answer": "V = IR",
+        "subject": "Physics",
+        "sub_topic": "Electricity",
+        "difficulty": 2
+    }
+]

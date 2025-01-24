@@ -32,28 +32,36 @@ fileprivate struct QuizPagination: View {
     @Binding var currentIndex: Int
     var invertedColor: Bool = false
     
+    private var progressWidth: CGFloat {
+        guard totalCount > 0 else { return 0 }
+        let screenWidth = UIScreen.main.bounds.width - 32 // Account for padding
+        let progress = CGFloat(currentIndex - 1) / CGFloat(totalCount) // Subtract 1 since currentIndex is 1-based
+        return max(0, min(screenWidth, progress * screenWidth)) // Clamp between 0 and screenWidth
+    }
+    
     var body: some View {
         ZStack(alignment: .leading) {
             Capsule()
                 .frame(height: 8)
                 .foregroundStyle(Color(hex: "#D9D9D9"))
             
-            Capsule()
-                .frame(width: CGFloat(currentIndex) / CGFloat(totalCount) * UIScreen.main.bounds.width, height: 8)
-                .foregroundStyle(Color.earnitAccent)
-            
-            Image(systemName: "star.fill")
-                .resizable()
-                .frame(width: 38, height: 38)
-                .foregroundStyle(.yellow)
-                .overlay(
-                    Text("\(currentIndex)")
-                        .foregroundStyle(.black)
-                        .font(.caption)
-                        .fontWeight(.bold)
-                )
-                .offset(x: CGFloat(currentIndex) / CGFloat(totalCount) * UIScreen.main.bounds.width - 12)
+            if totalCount > 0 && currentIndex > 0 {
+                Capsule()
+                    .frame(width: progressWidth, height: 8)
+                    .foregroundStyle(Color(hex: "#FD6854"))
                 
+                Image(systemName: "star.fill")
+                    .resizable()
+                    .frame(width: 38, height: 38)
+                    .foregroundStyle(.yellow)
+                    .overlay(
+                        Text("\(currentIndex)")
+                            .foregroundStyle(.black)
+                            .font(.caption)
+                            .fontWeight(.bold)
+                    )
+                    .offset(x: max(19, min(progressWidth - 19, UIScreen.main.bounds.width - 70))) // Ensure star stays within bounds
+            }
         }
         .padding(.horizontal)
     }

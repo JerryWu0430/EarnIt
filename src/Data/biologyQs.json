@@ -1,0 +1,758 @@
+[
+    {
+        "question": "What is the powerhouse of the cell?",
+        "options": [
+            "Nucleus",
+            "Mitochondria",
+            "Ribosome", 
+            "Chloroplast",
+            "Golgi apparatus"
+        ],
+        "correct_answer": "Mitochondria",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process by which plants make their food?",
+        "options": [
+            "Respiration",
+            "Photosynthesis", 
+            "Digestion",
+            "Fermentation",
+            "Transpiration"
+        ],
+        "correct_answer": "Photosynthesis",
+        "subject": "Biology",
+        "sub_topic": "Plant Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a nucleotide base found in DNA?",
+        "options": [
+            "Adenine",
+            "Uracil",
+            "Guanine",
+            "Cytosine",
+            "Thymine"
+        ],
+        "correct_answer": "Uracil",
+        "subject": "Biology",
+        "sub_topic": "Genetics",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the largest organ in the human body?",
+        "options": [
+            "Brain",
+            "Liver",
+            "Skin",
+            "Heart",
+            "Lungs"
+        ],
+        "correct_answer": "Skin",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "Which blood type is known as the universal donor?",
+        "options": [
+            "A+",
+            "B+",
+            "AB+",
+            "O-",
+            "O+"
+        ],
+        "correct_answer": "O-",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the process of cell division called?",
+        "options": [
+            "Mitosis",
+            "Meiosis",
+            "Binary Fission",
+            "Budding",
+            "Fragmentation"
+        ],
+        "correct_answer": "Mitosis",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which organelle is responsible for protein synthesis?",
+        "options": [
+            "Ribosome",
+            "Lysosome",
+            "Golgi apparatus",
+            "Mitochondria",
+            "Nucleus"
+        ],
+        "correct_answer": "Ribosome",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the primary function of white blood cells?",
+        "options": [
+            "Transport oxygen",
+            "Fight infection",
+            "Produce hormones",
+            "Clot blood",
+            "Store energy"
+        ],
+        "correct_answer": "Fight infection",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a type of muscle tissue?",
+        "options": [
+            "Skeletal",
+            "Cardiac",
+            "Smooth",
+            "Connective",
+            "Voluntary"
+        ],
+        "correct_answer": "Connective",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the process of breaking down glucose to release energy called?",
+        "options": [
+            "Photosynthesis",
+            "Cellular respiration",
+            "Fermentation",
+            "Digestion",
+            "Oxidation"
+        ],
+        "correct_answer": "Cellular respiration",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which vitamin is produced when skin is exposed to sunlight?",
+        "options": [
+            "Vitamin A",
+            "Vitamin B",
+            "Vitamin C",
+            "Vitamin D",
+            "Vitamin E"
+        ],
+        "correct_answer": "Vitamin D",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the name of the fluid that carries nutrients in plants?",
+        "options": [
+            "Phloem",
+            "Xylem",
+            "Sap",
+            "Water",
+            "Cytoplasm"
+        ],
+        "correct_answer": "Phloem",
+        "subject": "Biology",
+        "sub_topic": "Plant Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "Which kingdom do fungi belong to?",
+        "options": [
+            "Plantae",
+            "Animalia",
+            "Fungi",
+            "Protista",
+            "Monera"
+        ],
+        "correct_answer": "Fungi",
+        "subject": "Biology",
+        "sub_topic": "Classification",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the basic unit of heredity?",
+        "options": [
+            "Cell",
+            "Chromosome",
+            "Gene",
+            "DNA",
+            "Nucleus"
+        ],
+        "correct_answer": "Gene",
+        "subject": "Biology",
+        "sub_topic": "Genetics",
+        "difficulty": 1
+    },
+    {
+        "question": "Which organ is responsible for producing insulin?",
+        "options": [
+            "Liver",
+            "Pancreas",
+            "Kidney",
+            "Stomach",
+            "Intestine"
+        ],
+        "correct_answer": "Pancreas",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of converting light energy into chemical energy?",
+        "options": [
+            "Respiration",
+            "Photosynthesis",
+            "Fermentation",
+            "Digestion",
+            "Oxidation"
+        ],
+        "correct_answer": "Photosynthesis",
+        "subject": "Biology",
+        "sub_topic": "Plant Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a function of the liver?",
+        "options": [
+            "Detoxification",
+            "Protein synthesis",
+            "Bile production",
+            "Oxygen transport",
+            "Glucose storage"
+        ],
+        "correct_answer": "Oxygen transport",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the smallest unit of life?",
+        "options": [
+            "Atom",
+            "Cell",
+            "Molecule",
+            "Tissue",
+            "Organ"
+        ],
+        "correct_answer": "Cell",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which blood vessels carry blood away from the heart?",
+        "options": [
+            "Arteries",
+            "Veins",
+            "Capillaries",
+            "Venules",
+            "Arterioles"
+        ],
+        "correct_answer": "Arteries",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of converting RNA into protein called?",
+        "options": [
+            "Transcription",
+            "Translation",
+            "Replication",
+            "Mutation",
+            "Transformation"
+        ],
+        "correct_answer": "Translation",
+        "subject": "Biology",
+        "sub_topic": "Molecular Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "Which organelle contains chlorophyll?",
+        "options": [
+            "Mitochondria",
+            "Chloroplast",
+            "Nucleus",
+            "Ribosome",
+            "Golgi apparatus"
+        ],
+        "correct_answer": "Chloroplast",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the main function of red blood cells?",
+        "options": [
+            "Transport oxygen",
+            "Fight infection",
+            "Clot blood",
+            "Produce antibodies",
+            "Store nutrients"
+        ],
+        "correct_answer": "Transport oxygen",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a type of blood vessel?",
+        "options": [
+            "Artery",
+            "Vein",
+            "Capillary",
+            "Lymph node",
+            "Arteriole"
+        ],
+        "correct_answer": "Lymph node",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the process of copying DNA called?",
+        "options": [
+            "Transcription",
+            "Translation",
+            "Replication",
+            "Mutation",
+            "Transformation"
+        ],
+        "correct_answer": "Replication",
+        "subject": "Biology",
+        "sub_topic": "Molecular Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "Which hormone regulates blood sugar levels?",
+        "options": [
+            "Insulin",
+            "Thyroxine",
+            "Estrogen",
+            "Testosterone",
+            "Growth hormone"
+        ],
+        "correct_answer": "Insulin",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the function of the nucleus in a cell?",
+        "options": [
+            "Energy production",
+            "Protein synthesis",
+            "Stores genetic material",
+            "Waste removal",
+            "Cell movement"
+        ],
+        "correct_answer": "Stores genetic material",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a function of bones?",
+        "options": [
+            "Support",
+            "Protection",
+            "Movement",
+            "Digestion",
+            "Blood cell production"
+        ],
+        "correct_answer": "Digestion",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of plants releasing water vapor called?",
+        "options": [
+            "Transpiration",
+            "Respiration",
+            "Photosynthesis",
+            "Condensation",
+            "Evaporation"
+        ],
+        "correct_answer": "Transpiration",
+        "subject": "Biology",
+        "sub_topic": "Plant Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "Which organ system is responsible for removing waste from the body?",
+        "options": [
+            "Digestive system",
+            "Circulatory system",
+            "Excretory system",
+            "Respiratory system",
+            "Nervous system"
+        ],
+        "correct_answer": "Excretory system",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the basic structural unit of nervous tissue?",
+        "options": [
+            "Neuron",
+            "Muscle fiber",
+            "Blood cell",
+            "Bone cell",
+            "Skin cell"
+        ],
+        "correct_answer": "Neuron",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a type of plant tissue?",
+        "options": [
+            "Xylem",
+            "Phloem",
+            "Epithelial",
+            "Meristem",
+            "Ground tissue"
+        ],
+        "correct_answer": "Epithelial",
+        "subject": "Biology",
+        "sub_topic": "Plant Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the function of platelets in blood?",
+        "options": [
+            "Transport oxygen",
+            "Fight infection",
+            "Blood clotting",
+            "Produce antibodies",
+            "Carry nutrients"
+        ],
+        "correct_answer": "Blood clotting",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which organelle is known as the 'suicide bags' of the cell?",
+        "options": [
+            "Mitochondria",
+            "Lysosomes",
+            "Golgi apparatus",
+            "Endoplasmic reticulum",
+            "Vacuoles"
+        ],
+        "correct_answer": "Lysosomes",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the process of converting DNA to RNA called?",
+        "options": [
+            "Transcription",
+            "Translation",
+            "Replication",
+            "Mutation",
+            "Transformation"
+        ],
+        "correct_answer": "Transcription",
+        "subject": "Biology",
+        "sub_topic": "Molecular Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "Which of these is not a function of the kidney?",
+        "options": [
+            "Filter blood",
+            "Regulate pH",
+            "Produce bile",
+            "Remove waste",
+            "Control blood pressure"
+        ],
+        "correct_answer": "Produce bile",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the main function of the small intestine?",
+        "options": [
+            "Absorption of nutrients",
+            "Storage of waste",
+            "Production of bile",
+            "Breaking down food",
+            "Water absorption"
+        ],
+        "correct_answer": "Absorption of nutrients",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a greenhouse gas?",
+        "options": [
+            "Carbon dioxide",
+            "Methane",
+            "Nitrogen",
+            "Water vapor",
+            "Ozone"
+        ],
+        "correct_answer": "Nitrogen",
+        "subject": "Biology",
+        "sub_topic": "Environmental Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the process of breaking down food into simpler substances called?",
+        "options": [
+            "Absorption",
+            "Digestion",
+            "Assimilation",
+            "Excretion",
+            "Secretion"
+        ],
+        "correct_answer": "Digestion",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a type of joint?",
+        "options": [
+            "Ball and socket",
+            "Hinge",
+            "Pivot",
+            "Sliding",
+            "Membrane"
+        ],
+        "correct_answer": "Membrane",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the main function of the large intestine?",
+        "options": [
+            "Nutrient absorption",
+            "Water absorption",
+            "Food digestion",
+            "Bile production",
+            "Protein synthesis"
+        ],
+        "correct_answer": "Water absorption",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a type of RNA?",
+        "options": [
+            "Messenger RNA",
+            "Transfer RNA",
+            "Ribosomal RNA",
+            "Storage RNA",
+            "Small nuclear RNA"
+        ],
+        "correct_answer": "Storage RNA",
+        "subject": "Biology",
+        "sub_topic": "Molecular Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the process of cell death called?",
+        "options": [
+            "Necrosis",
+            "Apoptosis",
+            "Lysis",
+            "Mitosis",
+            "Meiosis"
+        ],
+        "correct_answer": "Apoptosis",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "Which organ is part of both the digestive and respiratory systems?",
+        "options": [
+            "Esophagus",
+            "Pharynx",
+            "Stomach",
+            "Trachea",
+            "Bronchi"
+        ],
+        "correct_answer": "Pharynx",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the study of heredity called?",
+        "options": [
+            "Biology",
+            "Genetics",
+            "Evolution",
+            "Ecology",
+            "Physiology"
+        ],
+        "correct_answer": "Genetics",
+        "subject": "Biology",
+        "sub_topic": "Genetics",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a type of white blood cell?",
+        "options": [
+            "Neutrophil",
+            "Basophil",
+            "Eosinophil",
+            "Platelet",
+            "Lymphocyte"
+        ],
+        "correct_answer": "Platelet",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the main function of the endoplasmic reticulum?",
+        "options": [
+            "Protein synthesis",
+            "Energy production",
+            "Waste removal",
+            "Cell division",
+            "DNA storage"
+        ],
+        "correct_answer": "Protein synthesis",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "Which hormone is known as the 'fight or flight' hormone?",
+        "options": [
+            "Insulin",
+            "Adrenaline",
+            "Thyroxine",
+            "Testosterone",
+            "Estrogen"
+        ],
+        "correct_answer": "Adrenaline",
+        "subject": "Biology",
+        "sub_topic": "Human Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of formation of new species called?",
+        "options": [
+            "Evolution",
+            "Speciation",
+            "Mutation",
+            "Adaptation",
+            "Natural selection"
+        ],
+        "correct_answer": "Speciation",
+        "subject": "Biology",
+        "sub_topic": "Evolution",
+        "difficulty": 2
+    },
+    {
+        "question": "Which of these is not a function of the skeletal system?",
+        "options": [
+            "Protection",
+            "Support",
+            "Movement",
+            "Digestion",
+            "Mineral storage"
+        ],
+        "correct_answer": "Digestion",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the main function of the lymphatic system?",
+        "options": [
+            "Transport oxygen",
+            "Fight infection",
+            "Digest food",
+            "Produce hormones",
+            "Filter blood"
+        ],
+        "correct_answer": "Fight infection",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "Which organelle is responsible for detoxification in plant cells?",
+        "options": [
+            "Vacuole",
+            "Chloroplast",
+            "Mitochondria",
+            "Golgi apparatus",
+            "Endoplasmic reticulum"
+        ],
+        "correct_answer": "Vacuole",
+        "subject": "Biology",
+        "sub_topic": "Plant Biology",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the study of ecosystems called?",
+        "options": [
+            "Biology",
+            "Ecology",
+            "Zoology",
+            "Botany",
+            "Physiology"
+        ],
+        "correct_answer": "Ecology",
+        "subject": "Biology",
+        "sub_topic": "Environmental Biology",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is not a type of tissue?",
+        "options": [
+            "Epithelial",
+            "Connective",
+            "Muscular",
+            "Nervous",
+            "Cellular"
+        ],
+        "correct_answer": "Cellular",
+        "subject": "Biology",
+        "sub_topic": "Human Anatomy",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the process of converting glucose to pyruvate called?",
+        "options": [
+            "Glycolysis",
+            "Krebs cycle",
+            "Electron transport chain",
+            "Beta oxidation",
+            "Gluconeogenesis"
+        ],
+        "correct_answer": "Glycolysis",
+        "subject": "Biology",
+        "sub_topic": "Cell Biology",
+        "difficulty": 2
+    }
+]

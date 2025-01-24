@@ -35,7 +35,7 @@ struct Onboarding_5: View {
                 selectedMode = "Balanced Mode"
                 viewModel.updateUserProfile(mode: selectedMode)
             }) {
-                ModeRow(color: Color.green, modeName: "Balanced Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
+                ModeRow(color: Color.green, modeName: "Balanced Mode", firstHeadline: "25 Minutes", secondHeadline: "25 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
                     .shadow(color: .gray.opacity(0.2), radius: 10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
@@ -47,7 +47,7 @@ struct Onboarding_5: View {
                 selectedMode = "Reward Mode"
                 viewModel.updateUserProfile(mode: selectedMode)
             }) {
-                ModeRow(color: Color.purple, modeName: "Reward Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
+                ModeRow(color: Color.purple, modeName: "Reward Mode", firstHeadline: "10 Minutes", secondHeadline: "50 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
                     .shadow(color: .gray.opacity(0.2), radius: 10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)

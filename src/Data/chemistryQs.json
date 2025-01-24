@@ -1,0 +1,786 @@
+[
+    {
+        "question": "What is the chemical symbol for water?",
+        "options": [
+            "H2O",
+            "O2", 
+            "CO2",
+            "NaCl",
+            "H2"
+        ],
+        "correct_answer": "H2O",
+        "subject": "Chemistry",
+        "sub_topic": "Basic Chemistry",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the pH of a neutral solution?",
+        "options": [
+            "0",
+            "7",
+            "14", 
+            "1",
+            "10"
+        ],
+        "correct_answer": "7",
+        "subject": "Chemistry",
+        "sub_topic": "Acids and Bases",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the atomic number of Carbon?",
+        "options": [
+            "6",
+            "12",
+            "8",
+            "14",
+            "4"
+        ],
+        "correct_answer": "6",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which element has the symbol Fe?",
+        "options": [
+            "Iron",
+            "Fluorine",
+            "Francium",
+            "Fermium",
+            "Flerovium"
+        ],
+        "correct_answer": "Iron",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What type of bond forms when electrons are shared between atoms?",
+        "options": [
+            "Covalent bond",
+            "Ionic bond",
+            "Hydrogen bond",
+            "Metallic bond",
+            "Van der Waals bond"
+        ],
+        "correct_answer": "Covalent bond",
+        "subject": "Chemistry",
+        "sub_topic": "Chemical Bonding",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the chemical formula for table salt?",
+        "options": [
+            "NaCl",
+            "H2O",
+            "CO2",
+            "O2",
+            "N2"
+        ],
+        "correct_answer": "NaCl",
+        "subject": "Chemistry",
+        "sub_topic": "Basic Chemistry",
+        "difficulty": 1
+    },
+    {
+        "question": "Which gas makes up the majority of Earth's atmosphere?",
+        "options": [
+            "Nitrogen",
+            "Oxygen",
+            "Carbon dioxide",
+            "Argon",
+            "Helium"
+        ],
+        "correct_answer": "Nitrogen",
+        "subject": "Chemistry",
+        "sub_topic": "Gases",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the atomic number of Oxygen?",
+        "options": [
+            "8",
+            "16",
+            "6",
+            "7",
+            "9"
+        ],
+        "correct_answer": "8",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is a noble gas?",
+        "options": [
+            "Helium",
+            "Oxygen",
+            "Nitrogen",
+            "Carbon",
+            "Hydrogen"
+        ],
+        "correct_answer": "Helium",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the charge of a proton?",
+        "options": [
+            "+1",
+            "-1",
+            "0",
+            "+2",
+            "-2"
+        ],
+        "correct_answer": "+1",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical symbol for Gold?",
+        "options": [
+            "Au",
+            "Ag",
+            "Fe",
+            "Cu",
+            "Pb"
+        ],
+        "correct_answer": "Au",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the most abundant element in the universe?",
+        "options": [
+            "Hydrogen",
+            "Helium",
+            "Carbon",
+            "Oxygen",
+            "Nitrogen"
+        ],
+        "correct_answer": "Hydrogen",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of a solid changing directly to a gas called?",
+        "options": [
+            "Sublimation",
+            "Evaporation",
+            "Condensation",
+            "Melting",
+            "Freezing"
+        ],
+        "correct_answer": "Sublimation",
+        "subject": "Chemistry",
+        "sub_topic": "Phase Changes",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the chemical formula for methane?",
+        "options": [
+            "CH4",
+            "CO2",
+            "H2O",
+            "NH3",
+            "C2H6"
+        ],
+        "correct_answer": "CH4",
+        "subject": "Chemistry",
+        "sub_topic": "Organic Chemistry",
+        "difficulty": 2
+    },
+    {
+        "question": "Which element has the atomic number 1?",
+        "options": [
+            "Hydrogen",
+            "Helium",
+            "Carbon",
+            "Oxygen",
+            "Nitrogen"
+        ],
+        "correct_answer": "Hydrogen",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical symbol for Silver?",
+        "options": [
+            "Ag",
+            "Au",
+            "Fe",
+            "Cu",
+            "Pb"
+        ],
+        "correct_answer": "Ag",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What type of reaction occurs when two or more substances combine to form a new substance?",
+        "options": [
+            "Synthesis",
+            "Decomposition",
+            "Single displacement",
+            "Double displacement",
+            "Combustion"
+        ],
+        "correct_answer": "Synthesis",
+        "subject": "Chemistry",
+        "sub_topic": "Chemical Reactions",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the chemical formula for sulfuric acid?",
+        "options": [
+            "H2SO4",
+            "HCl",
+            "HNO3",
+            "H3PO4",
+            "CH3COOH"
+        ],
+        "correct_answer": "H2SO4",
+        "subject": "Chemistry",
+        "sub_topic": "Acids and Bases",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the atomic number of Helium?",
+        "options": [
+            "2",
+            "1",
+            "3",
+            "4",
+            "5"
+        ],
+        "correct_answer": "2",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is a halogen?",
+        "options": [
+            "Chlorine",
+            "Neon",
+            "Sodium",
+            "Carbon",
+            "Helium"
+        ],
+        "correct_answer": "Chlorine",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical symbol for Sodium?",
+        "options": [
+            "Na",
+            "So",
+            "Sd",
+            "S",
+            "N"
+        ],
+        "correct_answer": "Na",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the pH of a strong acid?",
+        "options": [
+            "0-3",
+            "4-6",
+            "7",
+            "8-10",
+            "11-14"
+        ],
+        "correct_answer": "0-3",
+        "subject": "Chemistry",
+        "sub_topic": "Acids and Bases",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the chemical formula for carbon dioxide?",
+        "options": [
+            "CO2",
+            "H2O",
+            "O2",
+            "N2",
+            "CH4"
+        ],
+        "correct_answer": "CO2",
+        "subject": "Chemistry",
+        "sub_topic": "Basic Chemistry",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the atomic mass of Carbon-12?",
+        "options": [
+            "12",
+            "6",
+            "14",
+            "13",
+            "11"
+        ],
+        "correct_answer": "12",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 2
+    },
+    {
+        "question": "Which element is essential for all organic compounds?",
+        "options": [
+            "Carbon",
+            "Hydrogen",
+            "Oxygen",
+            "Nitrogen",
+            "Sulfur"
+        ],
+        "correct_answer": "Carbon",
+        "subject": "Chemistry",
+        "sub_topic": "Organic Chemistry",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical symbol for Potassium?",
+        "options": [
+            "K",
+            "P",
+            "Pt",
+            "Po",
+            "Pb"
+        ],
+        "correct_answer": "K",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the most electronegative element?",
+        "options": [
+            "Fluorine",
+            "Oxygen",
+            "Chlorine",
+            "Nitrogen",
+            "Carbon"
+        ],
+        "correct_answer": "Fluorine",
+        "subject": "Chemistry",
+        "sub_topic": "Chemical Bonding",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the chemical formula for ammonia?",
+        "options": [
+            "NH3",
+            "NO2",
+            "N2O",
+            "N2",
+            "NO"
+        ],
+        "correct_answer": "NH3",
+        "subject": "Chemistry",
+        "sub_topic": "Basic Chemistry",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the charge of an electron?",
+        "options": [
+            "-1",
+            "+1",
+            "0",
+            "+2",
+            "-2"
+        ],
+        "correct_answer": "-1",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is an alkali metal?",
+        "options": [
+            "Lithium",
+            "Carbon",
+            "Nitrogen",
+            "Oxygen",
+            "Chlorine"
+        ],
+        "correct_answer": "Lithium",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical symbol for Mercury?",
+        "options": [
+            "Hg",
+            "Me",
+            "Mr",
+            "Mc",
+            "Ma"
+        ],
+        "correct_answer": "Hg",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of a gas changing to a liquid called?",
+        "options": [
+            "Condensation",
+            "Evaporation",
+            "Sublimation",
+            "Melting",
+            "Freezing"
+        ],
+        "correct_answer": "Condensation",
+        "subject": "Chemistry",
+        "sub_topic": "Phase Changes",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical formula for glucose?",
+        "options": [
+            "C6H12O6",
+            "C12H22O11",
+            "CH4",
+            "C2H6O",
+            "C3H8"
+        ],
+        "correct_answer": "C6H12O6",
+        "subject": "Chemistry",
+        "sub_topic": "Organic Chemistry",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the atomic number of Nitrogen?",
+        "options": [
+            "7",
+            "14",
+            "5",
+            "9",
+            "6"
+        ],
+        "correct_answer": "7",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which element has the symbol Cu?",
+        "options": [
+            "Copper",
+            "Carbon",
+            "Calcium",
+            "Chromium",
+            "Cobalt"
+        ],
+        "correct_answer": "Copper",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical formula for hydrochloric acid?",
+        "options": [
+            "HCl",
+            "H2SO4",
+            "HNO3",
+            "H3PO4",
+            "CH3COOH"
+        ],
+        "correct_answer": "HCl",
+        "subject": "Chemistry",
+        "sub_topic": "Acids and Bases",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the atomic mass of Oxygen-16?",
+        "options": [
+            "16",
+            "8",
+            "15",
+            "17",
+            "18"
+        ],
+        "correct_answer": "16",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 2
+    },
+    {
+        "question": "Which of these is an alkaline earth metal?",
+        "options": [
+            "Magnesium",
+            "Sodium",
+            "Aluminum",
+            "Carbon",
+            "Nitrogen"
+        ],
+        "correct_answer": "Magnesium",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the chemical symbol for Lead?",
+        "options": [
+            "Pb",
+            "Ld",
+            "Le",
+            "L",
+            "P"
+        ],
+        "correct_answer": "Pb",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of a liquid changing to a gas called?",
+        "options": [
+            "Evaporation",
+            "Condensation",
+            "Sublimation",
+            "Melting",
+            "Freezing"
+        ],
+        "correct_answer": "Evaporation",
+        "subject": "Chemistry",
+        "sub_topic": "Phase Changes",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical formula for ethanol?",
+        "options": [
+            "C2H5OH",
+            "CH3OH",
+            "C3H7OH",
+            "C4H9OH",
+            "C5H11OH"
+        ],
+        "correct_answer": "C2H5OH",
+        "subject": "Chemistry",
+        "sub_topic": "Organic Chemistry",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the atomic number of Sodium?",
+        "options": [
+            "11",
+            "12",
+            "10",
+            "13",
+            "14"
+        ],
+        "correct_answer": "11",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which element has the symbol Ag?",
+        "options": [
+            "Silver",
+            "Gold",
+            "Iron",
+            "Copper",
+            "Lead"
+        ],
+        "correct_answer": "Silver",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical formula for nitric acid?",
+        "options": [
+            "HNO3",
+            "H2SO4",
+            "HCl",
+            "H3PO4",
+            "CH3COOH"
+        ],
+        "correct_answer": "HNO3",
+        "subject": "Chemistry",
+        "sub_topic": "Acids and Bases",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the atomic mass of Hydrogen-1?",
+        "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ],
+        "correct_answer": "1",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is a transition metal?",
+        "options": [
+            "Iron",
+            "Sodium",
+            "Calcium",
+            "Carbon",
+            "Chlorine"
+        ],
+        "correct_answer": "Iron",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the chemical symbol for Calcium?",
+        "options": [
+            "Ca",
+            "C",
+            "Cl",
+            "Co",
+            "Cu"
+        ],
+        "correct_answer": "Ca",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of a liquid changing to a solid called?",
+        "options": [
+            "Freezing",
+            "Melting",
+            "Evaporation",
+            "Condensation",
+            "Sublimation"
+        ],
+        "correct_answer": "Freezing",
+        "subject": "Chemistry",
+        "sub_topic": "Phase Changes",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical formula for methanol?",
+        "options": [
+            "CH3OH",
+            "C2H5OH",
+            "C3H7OH",
+            "C4H9OH",
+            "C5H11OH"
+        ],
+        "correct_answer": "CH3OH",
+        "subject": "Chemistry",
+        "sub_topic": "Organic Chemistry",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the atomic number of Chlorine?",
+        "options": [
+            "17",
+            "16",
+            "18",
+            "15",
+            "19"
+        ],
+        "correct_answer": "17",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which element has the symbol Fe?",
+        "options": [
+            "Iron",
+            "Gold",
+            "Silver",
+            "Copper",
+            "Lead"
+        ],
+        "correct_answer": "Iron",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical formula for phosphoric acid?",
+        "options": [
+            "H3PO4",
+            "H2SO4",
+            "HCl",
+            "HNO3",
+            "CH3COOH"
+        ],
+        "correct_answer": "H3PO4",
+        "subject": "Chemistry",
+        "sub_topic": "Acids and Bases",
+        "difficulty": 2
+    },
+    {
+        "question": "What is the atomic mass of Helium-4?",
+        "options": [
+            "4",
+            "2",
+            "3",
+            "5",
+            "6"
+        ],
+        "correct_answer": "4",
+        "subject": "Chemistry",
+        "sub_topic": "Atomic Structure",
+        "difficulty": 1
+    },
+    {
+        "question": "Which of these is a noble gas?",
+        "options": [
+            "Neon",
+            "Nitrogen",
+            "Carbon",
+            "Oxygen",
+            "Hydrogen"
+        ],
+        "correct_answer": "Neon",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the chemical symbol for Zinc?",
+        "options": [
+            "Zn",
+            "Z",
+            "Zi",
+            "Ze",
+            "Za"
+        ],
+        "correct_answer": "Zn",
+        "subject": "Chemistry",
+        "sub_topic": "Elements",
+        "difficulty": 1
+    },
+    {
+        "question": "What is the process of a solid changing to a liquid called?",
+        "options": [
+            "Melting",
+            "Freezing",
+            "Evaporation",
+            "Condensation",
+            "Sublimation"
+        ],
+        "correct_answer": "Melting",
+        "subject": "Chemistry",
+        "sub_topic": "Phase Changes",
+        "difficulty": 1
+    }
+]
