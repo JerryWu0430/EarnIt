@@ -10,6 +10,8 @@ import SwiftUI
 struct Onboarding_5: View {
     @State var name: String = ""
     @Binding var currentStep: Int
+    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @State private var selectedMode: String = "Focus Mode"
     
     var body: some View {
         VStack{
@@ -17,10 +19,41 @@ struct Onboarding_5: View {
                 .font(.headline)
                 .padding(.bottom, 30)
             
+            Button(action: { 
+                selectedMode = "Focus Mode"
+                viewModel.updateUserProfile(mode: selectedMode)
+            }) {
+                ModeRow(color: Color.earnitAccent, modeName: "Focus Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
+                    .shadow(color: .gray.opacity(0.2), radius: 10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(selectedMode == "Focus Mode" ? Color.earnitAccent : Color.clear, lineWidth: 2)
+                    )
+            }.padding(.horizontal)
             
-            ModeRow(color: Color.earnitAccent, modeName: "Focus Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time").shadow(color: .gray.opacity(0.2), radius: 10).padding(.horizontal)
-            ModeRow(color: Color.green, modeName: "Balanced Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time").shadow(color: .gray.opacity(0.2), radius: 10).padding(.horizontal)
-            ModeRow(color: Color.purple, modeName: "Reward Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time").shadow(color: .gray.opacity(0.2), radius: 10).padding(.horizontal)
+            Button(action: { 
+                selectedMode = "Balanced Mode"
+                viewModel.updateUserProfile(mode: selectedMode)
+            }) {
+                ModeRow(color: Color.green, modeName: "Balanced Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
+                    .shadow(color: .gray.opacity(0.2), radius: 10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(selectedMode == "Balanced Mode" ? Color.green : Color.clear, lineWidth: 2)
+                    )
+            }.padding(.horizontal)
+            
+            Button(action: { 
+                selectedMode = "Reward Mode"
+                viewModel.updateUserProfile(mode: selectedMode)
+            }) {
+                ModeRow(color: Color.purple, modeName: "Reward Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
+                    .shadow(color: .gray.opacity(0.2), radius: 10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(selectedMode == "Reward Mode" ? Color.purple : Color.clear, lineWidth: 2)
+                    )
+            }.padding(.horizontal)
             
             Spacer()
             
@@ -32,9 +65,13 @@ struct Onboarding_5: View {
                 }
             }.padding(.bottom).padding(.horizontal)
         }
+        .onAppear {
+            selectedMode = viewModel.selectedMode
+        }
     }
 }
 
 #Preview {
     Onboarding_5(currentStep: .constant(4))
+        .environmentObject(AuthenticationViewModel())
 }

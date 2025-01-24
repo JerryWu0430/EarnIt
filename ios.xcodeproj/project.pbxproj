@@ -49,6 +49,7 @@
 		ED403E862D2F4791008B6DC3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E852D2F4791008B6DC3 /* FirebaseAnalytics */; };
 		EDEFBCDD2D42C7D900F15B7A /* PendingVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCDC2D42C7D900F15B7A /* PendingVerificationView.swift */; };
 		EDEFBCF82D42F51800F15B7A /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */; };
+		EDEFBCFA2D4311A600F15B7A /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF92D4311A600F15B7A /* ProfileSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		EDEFBCEF2D42EB2600F15B7A /* DefaultConnector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DefaultConnector; sourceTree = "<group>"; };
 		EDEFBCF22D42EB2600F15B7A /* firebase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase.json; sourceTree = "<group>"; };
 		EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
+		EDEFBCF92D4311A600F15B7A /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				561B0E022CEB4361006A6143 /* Onboarding */,
 				561B0DF42CEB3440006A6143 /* Splash.swift */,
 				561B0E0A2CEB4726006A6143 /* Home.swift */,
+				EDEFBCF92D4311A600F15B7A /* ProfileSettings.swift */,
 				EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */,
 				56CDAD8A2CF28FE800034896 /* Settings.swift */,
 				56CDADC72CF3208700034896 /* Quiz.swift */,
@@ -422,6 +425,7 @@
 				ED403E802D2F46A9008B6DC3 /* AuthenticatedView.swift in Sources */,
 				ED403E7E2D2F46A0008B6DC3 /* AuthenticationViewModel.swift in Sources */,
 				56B385652CE3719E003F2CD4 /* iosApp.swift in Sources */,
+				EDEFBCFA2D4311A600F15B7A /* ProfileSettings.swift in Sources */,
 				561B0E122CEB54A4006A6143 /* Question.swift in Sources */,
 				561B0E162CEB5522006A6143 /* GameSession.swift in Sources */,
 				56B3857D2CE4E5D4003F2CD4 /* Paginations.swift in Sources */,

@@ -12,8 +12,7 @@ struct Settings: View {
     @EnvironmentObject var viewModel: AuthenticationViewModel
     @Environment(\.dismiss) var dismiss
     @State private var presentingConfirmationDialog = false
-    @State private var notificationsEnabled = false
-    @State private var screenTimeEnabled = true
+    @State private var showNotificationAlert = false
 
     var body: some View {
         NavigationView {
@@ -44,21 +43,40 @@ struct Settings: View {
                     // Settings List
                     List {
                         Section(header: Text("App Settings")) {
-                            NavigationLink(destination: Text("Profile Settings")) {
+                            NavigationLink(destination: ProfileSettings()
+                                .navigationBarBackButtonHidden(true)
+                            ) {
                                 ListRow(image: Image(systemName: "person.fill"), 
                                       text: "Profile", 
                                       content: { EmptyView() }(), 
                                       color: .blue)
                             }
                             
-                            Toggle(isOn: $notificationsEnabled) {
+                            Toggle(isOn: Binding(
+                                get: { viewModel.notificationsEnabled },
+                                set: { newValue in
+                                    if newValue {
+                                        // Immediately update UI
+                                        viewModel.updateUserProfile(notifications: true)
+                                        // Show alert and request permission
+                                        showNotificationAlert = true
+                                    } else {
+                                        viewModel.updateUserProfile(notifications: false)
+                                    }
+                                }
+                            )) {
                                 ListRow(image: Image(systemName: "bell.fill"), 
                                       text: "Notifications", 
                                       content: { EmptyView() }(), 
                                       color: .red)
                             }
                             
-                            Toggle(isOn: $screenTimeEnabled) {
+                            Toggle(isOn: Binding(
+                                get: { viewModel.screenTimeEnabled },
+                                set: { newValue in
+                                    viewModel.updateUserProfile(screenTime: newValue)
+                                }
+                            )) {
                                 ListRow(image: Image(systemName: "timer"), 
                                       text: "Screen Time", 
                                       content: { EmptyView() }(), 
@@ -90,12 +108,31 @@ struct Settings: View {
             .navigationBarItems(leading: Button(action: { dismiss() }) {
                 CustomButton(buttonType: .arrow, arrowDirection: .left, variant: .small)
             })
+            .navigationBarBackButtonHidden(true)
             .navigationBarTitle("Settings", displayMode: .inline)
             .confirmationDialog("Deleting your account is permanent. Do you want to delete your account?",
                               isPresented: $presentingConfirmationDialog,
                               titleVisibility: .visible) {
                 Button("Delete Account", role: .destructive, action: deleteAccount)
                 Button("Cancel", role: .cancel, action: {})
+            }
+            .alert("Enable Notifications", isPresented: $showNotificationAlert) {
+                Button("Cancel", role: .cancel) {
+                    // Revert to disabled if canceled
+                    viewModel.updateUserProfile(notifications: false)
+                }
+                Button("Enable") {
+                    // Request notification permission
+                    Task {
+                        let granted = await viewModel.requestNotificationPermission()
+                        if !granted {
+                            // If permission denied, revert to disabled
+                            viewModel.updateUserProfile(notifications: false)
+                        }
+                    }
+                }
+            } message: {
+                Text("Would you like to enable notifications? You can receive updates about your study progress and rewards.")
             }
         }
     }

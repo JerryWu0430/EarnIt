@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct Onboarding_3: View {
-    @State private var selectedSubject: String = "Maths"
+    @State private var selectedSubjects: [String] = []
     @Binding var currentStep: Int
+    @EnvironmentObject var viewModel: AuthenticationViewModel
     
     private let subjects = ["Maths", "Biology", "Physics", "Chemistry"]
     
@@ -31,25 +32,59 @@ struct Onboarding_3: View {
                 .fontWeight(.bold)
                 .padding(.top)
             
-            OptionSelector(selectedOption: $selectedSubject, 
-                         options: subjects, 
-                         label: "Select a Subject", 
-                         whiteBackground: true)
-                .padding([.horizontal, .top])
+            VStack(spacing: 10) {
+                ForEach(subjects, id: \.self) { subject in
+                    Button(action: {
+                        if selectedSubjects.contains(subject) {
+                            selectedSubjects.removeAll { $0 == subject }
+                        } else {
+                            selectedSubjects.append(subject)
+                        }
+                    }) {
+                        HStack {
+                            Text(subject)
+                                .foregroundColor(.primary)
+                            Spacer()
+                            if selectedSubjects.contains(subject) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.earnitAccent)
+                            } else {
+                                Image(systemName: "circle")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .padding()
+                        .background(Color(.systemBackground))
+                        .cornerRadius(10)
+                        .shadow(color: .gray.opacity(0.2), radius: 5)
+                    }
+                }
+            }
+            .padding([.horizontal, .top])
             
             Spacer()
             
             HStack {
                 Paginations(totalCount: 5, currentIndex: .constant(2), paginationType: .onboarding)
                 Spacer()
-                Button(action: { currentStep += 1 }) {
+                Button(action: {
+                    if !selectedSubjects.isEmpty {
+                        viewModel.updateUserProfile(subjects: selectedSubjects)
+                        currentStep += 1
+                    }
+                }) {
                     CustomButton(buttonType: .arrow, arrowDirection: .right)
                 }
+                .disabled(selectedSubjects.isEmpty)
             }.padding(.bottom).padding(.horizontal)
+        }
+        .onAppear {
+            selectedSubjects = viewModel.selectedSubjects
         }
     }
 }
 
 #Preview {
     Onboarding_3(currentStep: .constant(2))
+        .environmentObject(AuthenticationViewModel())
 }

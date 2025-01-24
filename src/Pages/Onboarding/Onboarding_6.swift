@@ -10,6 +10,7 @@ import SwiftUI
 struct Onboarding_6: View {
     @State var name: String = ""
     @Binding var currentStep: Int
+    @EnvironmentObject var viewModel: AuthenticationViewModel
     
     var body: some View {
         VStack{
@@ -30,10 +31,29 @@ struct Onboarding_6: View {
                 .padding(.top)
                 .foregroundStyle(.white)
             
-            Button(action: { currentStep += 1 }) {
+            Button(action: {
+                Task {
+                    // Request notification permission
+                    let granted = await viewModel.requestNotificationPermission()
+                    // Enable screen time regardless of notification permission
+                    viewModel.updateUserProfile(screenTime: true)
+                    // Move to next step
+                    currentStep += 1
+                }
+            }) {
                 CustomButton(buttonType: .full, text: "Allow", invertedColor: true)
             }
             .padding([.horizontal, .top])
+            
+            Button(action: {
+                // Skip permissions but still move forward
+                currentStep += 1
+            }) {
+                Text("Skip")
+                    .foregroundColor(.white)
+                    .padding(.top)
+            }
+            
             Spacer()
             
             HStack{
@@ -49,4 +69,5 @@ struct Onboarding_6: View {
 
 #Preview {
     Onboarding_6(currentStep: .constant(5))
+        .environmentObject(AuthenticationViewModel())
 }

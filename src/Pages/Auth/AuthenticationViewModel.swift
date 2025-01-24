@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 import GoogleSignInSwift
+import UserNotifications
 
 enum AuthenticationState {
   case unauthenticated
@@ -30,6 +31,11 @@ class AuthenticationViewModel: ObservableObject {
   @Published var password: String = ""
   @Published var confirmPassword: String = ""
   @Published var userName: String = ""
+  @Published var selectedSubjects: [String] = []
+  @Published var selectedMode: String = "Focus Mode"
+  @Published var selectedApps: [String] = []
+  @Published var notificationsEnabled: Bool = false
+  @Published var screenTimeEnabled: Bool = false
 
   @Published var flow: AuthenticationFlow = .splash {
     didSet {
@@ -209,6 +215,59 @@ class AuthenticationViewModel: ObservableObject {
       self.displayName = savedName
     } else {
       print("❌ No username found in UserDefaults")
+    }
+  }
+
+  func updateUserProfile(name: String? = nil, subjects: [String]? = nil, mode: String? = nil, apps: [String]? = nil, notifications: Bool? = nil, screenTime: Bool? = nil) {
+    if let name = name {
+      updateUserName(name)
+    }
+    if let subjects = subjects {
+      selectedSubjects = subjects
+      UserDefaults.standard.set(subjects, forKey: "userSubjects")
+    }
+    if let mode = mode {
+      selectedMode = mode
+      UserDefaults.standard.set(mode, forKey: "userMode")
+    }
+    if let apps = apps {
+      selectedApps = apps
+      UserDefaults.standard.set(apps, forKey: "userApps")
+    }
+    if let notifications = notifications {
+      notificationsEnabled = notifications
+      UserDefaults.standard.set(notifications, forKey: "notificationsEnabled")
+    }
+    if let screenTime = screenTime {
+      screenTimeEnabled = screenTime
+      UserDefaults.standard.set(screenTime, forKey: "screenTimeEnabled")
+    }
+  }
+
+  func loadUserProfile() {
+    loadUserName()
+    selectedSubjects = UserDefaults.standard.stringArray(forKey: "userSubjects") ?? []
+    selectedMode = UserDefaults.standard.string(forKey: "userMode") ?? "Focus Mode"
+    selectedApps = UserDefaults.standard.stringArray(forKey: "userApps") ?? []
+    notificationsEnabled = UserDefaults.standard.bool(forKey: "notificationsEnabled")
+    screenTimeEnabled = UserDefaults.standard.bool(forKey: "screenTimeEnabled")
+  }
+
+  func requestNotificationPermission() async -> Bool {
+    let center = UNUserNotificationCenter.current()
+    do {
+      let settings = await center.notificationSettings()
+      if settings.authorizationStatus == .authorized {
+        return true
+      }
+      let granted = try await center.requestAuthorization(options: [.alert, .sound, .badge])
+      await MainActor.run {
+        updateUserProfile(notifications: granted)
+      }
+      return granted
+    } catch {
+      print("❌ Notification permission error: \(error)")
+      return false
     }
   }
 }

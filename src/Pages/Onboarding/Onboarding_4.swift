@@ -10,6 +10,8 @@ import SwiftUI
 struct Onboarding_4: View {
     @State var name: String = ""
     @Binding var currentStep: Int
+    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @State private var showingAppSelection = false
     
     var body: some View {
         VStack{
@@ -32,10 +34,40 @@ struct Onboarding_4: View {
                 .padding(.top)
                 .foregroundStyle(.white)
             
-            Button(action: { /* Add app selection logic */ }) {
+            if !viewModel.selectedApps.isEmpty {
+                ForEach(viewModel.selectedApps, id: \.self) { app in
+                    Text(app)
+                        .foregroundStyle(.white)
+                }
+            }
+            
+            Button(action: {
+                showingAppSelection = true
+            }) {
                 CustomButton(buttonType: .full, text: "Add Apps", invertedColor: true)
             }
             .padding([.horizontal, .top])
+            .sheet(isPresented: $showingAppSelection) {
+                // Temporary app selection
+                List(["Instagram", "TikTok", "YouTube", "Facebook", "Twitter"], id: \.self) { app in
+                    Button(action: {
+                        var apps = viewModel.selectedApps
+                        if !apps.contains(app) {
+                            apps.append(app)
+                            viewModel.updateUserProfile(apps: apps)
+                        }
+                    }) {
+                        HStack {
+                            Text(app)
+                            Spacer()
+                            if viewModel.selectedApps.contains(app) {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                }
+            }
+            
             Spacer()
             
             HStack{
@@ -51,4 +83,5 @@ struct Onboarding_4: View {
 
 #Preview {
     Onboarding_4(currentStep: .constant(3))
+        .environmentObject(AuthenticationViewModel())
 }
