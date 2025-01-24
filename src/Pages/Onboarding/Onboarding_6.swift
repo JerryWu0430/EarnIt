@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Onboarding_6: View {
-    //Change
     @State var name: String = ""
+    @Binding var currentStep: Int
     
     var body: some View {
         VStack{
@@ -30,19 +30,23 @@ struct Onboarding_6: View {
                 .padding(.top)
                 .foregroundStyle(.white)
             
-            CustomButton(buttonType : .full, text: "Allow", invertedColor: true)
-                .padding([.horizontal, .top])
+            Button(action: { currentStep += 1 }) {
+                CustomButton(buttonType: .full, text: "Allow", invertedColor: true)
+            }
+            .padding([.horizontal, .top])
             Spacer()
             
             HStack{
-                Paginations(totalCount: 6, currentIndex: .constant(6), paginationType: .onboarding, invertedColor: true)
+                Paginations(totalCount: 5, currentIndex: .constant(5), paginationType: .onboarding, invertedColor: true)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right, invertedColor: true)
+                Button(action: { currentStep += 1 }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right, invertedColor: true)
+                }
             }.padding(.bottom).padding(.horizontal)
         }.background(Color.earnitAccent)
     }
 }
 
 #Preview {
-    Onboarding_6()
+    Onboarding_6(currentStep: .constant(5))
 }

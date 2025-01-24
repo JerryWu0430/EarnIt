@@ -38,8 +38,10 @@ struct PendingVerificationView: View {
             Task {
                 await viewModel.checkEmailVerification()
                 if await viewModel.isEmailVerified {
-                    // Dismiss all the way back to root
-                    rootIsPresented = false
+                    timer?.invalidate()
+                    await MainActor.run {
+                        rootIsPresented = false  // This will dismiss the authentication flow
+                    }
                 }
             }
         }

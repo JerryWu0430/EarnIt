@@ -8,21 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = AuthenticationViewModel()
-    
+    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @State private var showingAuthentication = true
+
     var body: some View {
-        AuthenticatedView(
-            unauthenticated: {
-                Splash()
-            },
-            content: {
-                Home()
+        Group {
+            if viewModel.authenticationState == .authenticated {
+                if viewModel.showOnboarding {
+                    OnboardingFlow()
+                } else {
+                    Home()
+                }
+            } else {
+                AuthenticationView(isPresented: $showingAuthentication)
             }
-        )
-        .environmentObject(viewModel)
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AuthenticationViewModel())
 }

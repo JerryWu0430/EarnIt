@@ -27,6 +27,7 @@ struct Login: View {
     private func signInWithEmailPassword() {
         Task {
             if await viewModel.signInWithEmailPassword() == true {
+                print("Successfully signed in with email/password")
                 dismiss()
             }
         }
@@ -35,6 +36,7 @@ struct Login: View {
     private func signInWithGoogle() {
         Task {
             if await viewModel.signInWithGoogle() == true {
+                print("Successfully signed in with Google")
                 dismiss()
             }
         }
@@ -49,113 +51,123 @@ struct Login: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading){
-                HStack{
-                    CustomButton(buttonType: .arrow, arrowDirection: .left)
-                        .onTapGesture {
-                            dismiss()
-                        }
-                    Spacer()
-                }.padding(.leading)
-                
-                Text("Welcome Back!")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.leading)
-                Text("Sign in to continue")
-                    .font(.headline)
-                    .fontWeight(.regular)
-                    .foregroundStyle(.gray)
-                    .padding([.leading, .bottom])
-                
-                CustomTextInput(text: $viewModel.email, label: "Email")
-                    .textInputAutocapitalization(.never)
-                    .disableAutocorrection(true)
-                    .focused($focus, equals: .email)
-                    .submitLabel(.next)
-                    .onSubmit {
-                        self.focus = .password
-                    }
-                    .padding(.bottom)
-                
-                CustomTextInput(text: $viewModel.password, label: "Password", protected: true)
-                    .focused($focus, equals: .password)
-                    .submitLabel(.go)
-                    .onSubmit {
-                        signInWithEmailPassword()
-                    }
-                    .padding(.bottom)
-
-                if !viewModel.errorMessage.isEmpty {
-                    Text(viewModel.errorMessage)
-                        .foregroundColor(Color(UIColor.systemRed))
-                        .padding(.horizontal)
-                }
-
-                // Forgot Password Button
-                Button(action: {
-                    showingForgotPasswordAlert = true
+        VStack(alignment: .leading) {
+            HStack {
+                Button(action: { 
+                    dismiss()
+                    viewModel.flow = .splash
                 }) {
-                    Text("Forgot Password?")
-                        .foregroundColor(.blue)
-                        .font(.subheadline)
+                    CustomButton(buttonType: .arrow, arrowDirection: .left)
                 }
-                .padding(.horizontal)
-                .alert("Reset Password", isPresented: $showingForgotPasswordAlert) {
-                    Button("Cancel", role: .cancel) { }
-                    Button(isResettingPassword ? "Sending..." : "Reset") {
-                        if !isResettingPassword {
-                            resetPassword()
+                Spacer()
+            }.padding(.leading)
+            
+            Text("Welcome Back!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .padding(.leading)
+            Text("Sign in to continue")
+                .font(.headline)
+                .fontWeight(.regular)
+                .foregroundStyle(.gray)
+                .padding([.leading, .bottom])
+            
+            CustomTextInput(text: $viewModel.email, label: "Email")
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+                .focused($focus, equals: .email)
+                .submitLabel(.next)
+                .onSubmit {
+                    self.focus = .password
+                }
+                .padding(.bottom)
+            
+            CustomTextInput(text: $viewModel.password, label: "Password", protected: true)
+                .focused($focus, equals: .password)
+                .submitLabel(.go)
+                .onSubmit {
+                    signInWithEmailPassword()
+                }
+                .padding(.bottom)
+
+            if !viewModel.errorMessage.isEmpty {
+                Text(viewModel.errorMessage)
+                    .foregroundColor(Color(UIColor.systemRed))
+                    .padding(.horizontal)
+            }
+
+            Button(action: {
+                showingForgotPasswordAlert = true
+            }) {
+                Text("Forgot Password?")
+                    .foregroundColor(.blue)
+                    .font(.subheadline)
+            }
+            .padding(.horizontal)
+            .alert("Reset Password", isPresented: $showingForgotPasswordAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button(isResettingPassword ? "Sending..." : "Reset") {
+                    if !isResettingPassword {
+                        Task {
+                            if await viewModel.resetPassword() {
+                                showingForgotPasswordAlert = false
+                            }
                         }
                     }
-                    .disabled(viewModel.email.isEmpty || isResettingPassword)
-                } message: {
-                    Text("We'll send a password reset link to \(viewModel.email). Make sure your email is correct.")
                 }
-                
+                .disabled(viewModel.email.isEmpty || isResettingPassword)
+            } message: {
+                Text("We'll send a password reset link to \(viewModel.email). Make sure your email is correct.")
+            }
+            
+            Button(action: signInWithEmailPassword) {
                 CustomButton(buttonType: .full, text: viewModel.authenticationState != .authenticating ? "Sign In" : "Loading...")
-                    .disabled(!viewModel.isValid)
-                    .onTapGesture {
-                        signInWithEmailPassword()
+            }
+            .disabled(!viewModel.isValid || viewModel.authenticationState == .authenticating)
+            .padding([.horizontal, .bottom])
+            
+            HStack {
+                Rectangle()
+                    .foregroundStyle(.gray)
+                    .frame(height:1)
+                Text("or sign in with")
+                    .foregroundStyle(.gray)
+                    .font(.caption2)
+                Rectangle()
+                    .foregroundStyle(.gray)
+                    .frame(height:1)
+            }.padding(.horizontal)
+            
+            SocialButton(buttonType: .Google, text: "Sign in with google") {
+                Task {
+                    if await viewModel.signInWithGoogle() == true {
+                        print("Successfully signed in with Google")
+                        dismiss()
                     }
-                    .padding([.horizontal,.bottom])
-                
-                HStack{
-                    Rectangle()
-                        .foregroundStyle(.gray)
-                        .frame(height:1)
-                    Text("or sign in with")
-                        .foregroundStyle(.gray)
-                        .font(.caption2)
-                    Rectangle()
-                        .foregroundStyle(.gray)
-                        .frame(height:1)
-                }.padding(.horizontal)
-                
-                SocialButton(buttonType: .Google, text: "Sign in with google"){
-                    signInWithGoogle()
-                }
-                    .padding()
-                
-                Spacer()
-                
-                HStack{
-                    Spacer()
-                    Text("Don't have an account? ")
-                    Button(action: { viewModel.switchFlow() }) {
-                        Text("Sign Up")
-                            .fontWeight(.bold)
-                    }
-                    Spacer()
                 }
             }
-            .analyticsScreen(name: "\(Self.self)")
+            .padding()
+            
+            Spacer()
+            
+            HStack {
+                Spacer()
+                Text("Don't have an account? ")
+                Button(action: { viewModel.switchFlow() }) {
+                    Text("Sign Up")
+                        .fontWeight(.bold)
+                }
+                Spacer()
+            }
         }
+        .navigationBarHidden(true)
+        .analyticsScreen(name: "\(Self.self)")
     }
 }
 
 #Preview {
-    Login()
-        .environmentObject(AuthenticationViewModel())
+    NavigationView {
+        Login()
+            .environmentObject(AuthenticationViewModel())
+    }
 }

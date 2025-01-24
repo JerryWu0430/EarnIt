@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct Onboarding_1: View {
-    //Change
     @State var name: String = ""
+    @Binding var currentStep: Int
+    @EnvironmentObject var viewModel: AuthenticationViewModel
     
     var body: some View {
         VStack{
@@ -23,7 +24,7 @@ struct Onboarding_1: View {
                 }.frame(width: 302, height: 302)
             }.padding(.top, 100)
             
-            Text("What is the name of the\n child using this device?")
+            Text("What is your name?")
                 .font(.title3)
                 .fontWeight(.bold)
                 .padding(.top)
@@ -34,14 +35,22 @@ struct Onboarding_1: View {
             Spacer()
             
             HStack{
-                Paginations(totalCount: 6, currentIndex: .constant(1), paginationType: .onboarding)
+                Paginations(totalCount: 5, currentIndex: .constant(1), paginationType: .onboarding)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right)
+                Button(action: {
+                    if !name.isEmpty {
+                        viewModel.updateUserName(name)
+                        currentStep += 1
+                    }
+                }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right)
+                }
             }.padding(.bottom).padding(.horizontal)
         }
     }
 }
 
 #Preview {
-    Onboarding_1()
+    Onboarding_1(currentStep: .constant(1))
+        .environmentObject(AuthenticationViewModel())
 }

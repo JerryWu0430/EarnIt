@@ -8,41 +8,48 @@
 import SwiftUI
 
 struct Onboarding_3: View {
-    //Change
-    @State var name: String = ""
+    @State private var selectedSubject: String = "Maths"
+    @Binding var currentStep: Int
+    
+    private let subjects = ["Maths", "Biology", "Physics", "Chemistry"]
     
     var body: some View {
-        VStack{
-            ZStack{
+        VStack {
+            ZStack {
                 Circle()
                     .frame(width: 302, height: 302)
                     .foregroundStyle(Color.earnitAccent.opacity(0.2))
-                VStack{
+                VStack {
                     Spacer()
                     Image("o3")
                 }.frame(width: 302, height: 302)
             }.padding(.top, 100)
             
-            Text("What subjects do you want \nyour child to focus on?")
+            Text("What subjects do you want \n to focus on?")
                 .multilineTextAlignment(.center)
                 .font(.title3)
                 .fontWeight(.bold)
                 .padding(.top)
             
-            OptionSelector(selectedOption: .constant("Maths"), options: ["2-6", "7-12", "12-16"], label: "Select an Option", whiteBackground: true)
+            OptionSelector(selectedOption: $selectedSubject, 
+                         options: subjects, 
+                         label: "Select a Subject", 
+                         whiteBackground: true)
                 .padding([.horizontal, .top])
             
             Spacer()
             
-            HStack{
-                Paginations(totalCount: 6, currentIndex: .constant(3), paginationType: .onboarding)
+            HStack {
+                Paginations(totalCount: 5, currentIndex: .constant(2), paginationType: .onboarding)
                 Spacer()
-                CustomButton(buttonType: .arrow, arrowDirection: .right)
+                Button(action: { currentStep += 1 }) {
+                    CustomButton(buttonType: .arrow, arrowDirection: .right)
+                }
             }.padding(.bottom).padding(.horizontal)
         }
     }
 }
 
 #Preview {
-    Onboarding_3()
+    Onboarding_3(currentStep: .constant(2))
 }
