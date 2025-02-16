@@ -53,4 +53,4 @@ struct PendingVerificationView_Previews: PreviewProvider {
         PendingVerificationView(rootIsPresented: .constant(true))
             .environmentObject(AuthenticationViewModel())
     }
-} 
+}

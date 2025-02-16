@@ -1,5 +1,0 @@
-connectorId: default
-generate:
-  swiftSdk:
-    outputDir: ../../src/dataconnect-generated/swift
-    package: DefaultConnector

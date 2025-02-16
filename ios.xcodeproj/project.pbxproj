@@ -42,11 +42,11 @@
 		ED403E742D2F3859008B6DC3 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E732D2F3859008B6DC3 /* FirebaseCore */; };
 		ED403E772D2F389A008B6DC3 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E762D2F389A008B6DC3 /* GoogleSignIn */; };
 		ED403E792D2F389A008B6DC3 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E782D2F389A008B6DC3 /* GoogleSignInSwift */; };
-		ED403E7B2D2F39F4008B6DC3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED403E7A2D2F39F4008B6DC3 /* GoogleService-Info.plist */; };
 		ED403E7E2D2F46A0008B6DC3 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E7D2D2F469C008B6DC3 /* AuthenticationViewModel.swift */; };
 		ED403E802D2F46A9008B6DC3 /* AuthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E7F2D2F46A4008B6DC3 /* AuthenticatedView.swift */; };
 		ED403E822D2F46B1008B6DC3 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */; };
 		ED403E862D2F4791008B6DC3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E852D2F4791008B6DC3 /* FirebaseAnalytics */; };
+		EDDF35A92D6241C500B335E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDDF35A82D6241C500B335E9 /* GoogleService-Info.plist */; };
 		EDEFBCDD2D42C7D900F15B7A /* PendingVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCDC2D42C7D900F15B7A /* PendingVerificationView.swift */; };
 		EDEFBCF82D42F51800F15B7A /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */; };
 		EDEFBCFA2D4311A600F15B7A /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF92D4311A600F15B7A /* ProfileSettings.swift */; };
@@ -90,25 +90,12 @@
 		56CDAD8A2CF28FE800034896 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		56CDADC72CF3208700034896 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		56EE6DBC2CF8D61F00A6438B /* year1_randomQs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = year1_randomQs.json; sourceTree = "<group>"; };
-		ED403E7A2D2F39F4008B6DC3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED403E7C2D2F3A22008B6DC3 /* ios-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ios-Info.plist"; sourceTree = "<group>"; };
 		ED403E7D2D2F469C008B6DC3 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		ED403E7F2D2F46A4008B6DC3 /* AuthenticatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticatedView.swift; sourceTree = "<group>"; };
 		ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		EDDF35A82D6241C500B335E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDEFBCDC2D42C7D900F15B7A /* PendingVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingVerificationView.swift; sourceTree = "<group>"; };
-		EDEFBCDE2D42EB2600F15B7A /* implicit.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = implicit.gql; sourceTree = "<group>"; };
-		EDEFBCDF2D42EB2600F15B7A /* input.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.gql; sourceTree = "<group>"; };
-		EDEFBCE02D42EB2600F15B7A /* mutation.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutation.gql; sourceTree = "<group>"; };
-		EDEFBCE12D42EB2600F15B7A /* query.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = query.gql; sourceTree = "<group>"; };
-		EDEFBCE22D42EB2600F15B7A /* relation.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = relation.gql; sourceTree = "<group>"; };
-		EDEFBCE42D42EB2600F15B7A /* prelude.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = prelude.gql; sourceTree = "<group>"; };
-		EDEFBCE72D42EB2600F15B7A /* connector.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = connector.yaml; sourceTree = "<group>"; };
-		EDEFBCE82D42EB2600F15B7A /* mutations.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutations.gql; sourceTree = "<group>"; };
-		EDEFBCE92D42EB2600F15B7A /* queries.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = queries.gql; sourceTree = "<group>"; };
-		EDEFBCEB2D42EB2600F15B7A /* schema.gql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema.gql; sourceTree = "<group>"; };
-		EDEFBCED2D42EB2600F15B7A /* dataconnect.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = dataconnect.yaml; sourceTree = "<group>"; };
-		EDEFBCEF2D42EB2600F15B7A /* DefaultConnector */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DefaultConnector; sourceTree = "<group>"; };
-		EDEFBCF22D42EB2600F15B7A /* firebase.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = firebase.json; sourceTree = "<group>"; };
 		EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFlow.swift; sourceTree = "<group>"; };
 		EDEFBCF92D4311A600F15B7A /* ProfileSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettings.swift; sourceTree = "<group>"; };
 		EDEFBCFB2D4336EC00F15B7A /* mathQs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mathQs.json; sourceTree = "<group>"; };
@@ -195,9 +182,6 @@
 		56B385582CE3719E003F2CD4 = {
 			isa = PBXGroup;
 			children = (
-				EDEFBCEE2D42EB2600F15B7A /* dataconnect */,
-				EDEFBCF12D42EB2600F15B7A /* dataconnect-generated */,
-				EDEFBCF22D42EB2600F15B7A /* firebase.json */,
 				ED403E7C2D2F3A22008B6DC3 /* ios-Info.plist */,
 				56B385632CE3719E003F2CD4 /* src */,
 				56B385622CE3719E003F2CD4 /* Products */,
@@ -215,7 +199,7 @@
 		56B385632CE3719E003F2CD4 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				ED403E7A2D2F39F4008B6DC3 /* GoogleService-Info.plist */,
+				EDDF35A82D6241C500B335E9 /* GoogleService-Info.plist */,
 				56B385662CE3719E003F2CD4 /* ContentView.swift */,
 				56B385752CE37607003F2CD4 /* Extensions.swift */,
 				56B385642CE3719E003F2CD4 /* iosApp.swift */,
@@ -268,80 +252,6 @@
 				56EE6DBC2CF8D61F00A6438B /* year1_randomQs.json */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		EDEFBCE32D42EB2600F15B7A /* main */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCDE2D42EB2600F15B7A /* implicit.gql */,
-				EDEFBCDF2D42EB2600F15B7A /* input.gql */,
-				EDEFBCE02D42EB2600F15B7A /* mutation.gql */,
-				EDEFBCE12D42EB2600F15B7A /* query.gql */,
-				EDEFBCE22D42EB2600F15B7A /* relation.gql */,
-			);
-			path = main;
-			sourceTree = "<group>";
-		};
-		EDEFBCE52D42EB2600F15B7A /* schema */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCE32D42EB2600F15B7A /* main */,
-				EDEFBCE42D42EB2600F15B7A /* prelude.gql */,
-			);
-			path = schema;
-			sourceTree = "<group>";
-		};
-		EDEFBCE62D42EB2600F15B7A /* .dataconnect */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCE52D42EB2600F15B7A /* schema */,
-			);
-			path = .dataconnect;
-			sourceTree = "<group>";
-		};
-		EDEFBCEA2D42EB2600F15B7A /* connector */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCE72D42EB2600F15B7A /* connector.yaml */,
-				EDEFBCE82D42EB2600F15B7A /* mutations.gql */,
-				EDEFBCE92D42EB2600F15B7A /* queries.gql */,
-			);
-			path = connector;
-			sourceTree = "<group>";
-		};
-		EDEFBCEC2D42EB2600F15B7A /* schema */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCEB2D42EB2600F15B7A /* schema.gql */,
-			);
-			path = schema;
-			sourceTree = "<group>";
-		};
-		EDEFBCEE2D42EB2600F15B7A /* dataconnect */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCE62D42EB2600F15B7A /* .dataconnect */,
-				EDEFBCEA2D42EB2600F15B7A /* connector */,
-				EDEFBCEC2D42EB2600F15B7A /* schema */,
-				EDEFBCED2D42EB2600F15B7A /* dataconnect.yaml */,
-			);
-			path = dataconnect;
-			sourceTree = "<group>";
-		};
-		EDEFBCF02D42EB2600F15B7A /* swift */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCEF2D42EB2600F15B7A /* DefaultConnector */,
-			);
-			path = swift;
-			sourceTree = "<group>";
-		};
-		EDEFBCF12D42EB2600F15B7A /* dataconnect-generated */ = {
-			isa = PBXGroup;
-			children = (
-				EDEFBCF02D42EB2600F15B7A /* swift */,
-			);
-			path = "dataconnect-generated";
 			sourceTree = "<group>";
 		};
 		EDEFBD062D43435500F15B7A /* ViewModels */ = {
@@ -424,8 +334,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				56B3856C2CE3719F003F2CD4 /* Preview Assets.xcassets in Resources */,
+				EDDF35A92D6241C500B335E9 /* GoogleService-Info.plist in Resources */,
 				EDEFBCFE2D43370600F15B7A /* biologyQs.json in Resources */,
-				ED403E7B2D2F39F4008B6DC3 /* GoogleService-Info.plist in Resources */,
 				56EE6DBD2CF8D61F00A6438B /* year1_randomQs.json in Resources */,
 				EDEFBD022D43371900F15B7A /* chemistryQs.json in Resources */,
 				EDEFBD002D43370F00F15B7A /* physicsQs.json in Resources */,
@@ -609,7 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = PUX68273X3;
+				DEVELOPMENT_TEAM = US5485685M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-Info.plist";
@@ -624,7 +534,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.earnit.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.earn-it.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -640,7 +550,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = PUX68273X3;
+				DEVELOPMENT_TEAM = US5485685M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-Info.plist";
@@ -655,7 +565,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.earnit.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.earn-it.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
