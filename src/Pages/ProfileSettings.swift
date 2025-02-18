@@ -10,7 +10,12 @@ struct ProfileSettings: View {
     @EnvironmentObject var viewModel: AuthenticationViewModel
     @Environment(\.dismiss) var dismiss
     @StateObject private var model = TimeLimitModel.shared
+    @StateObject private var timeManager: TimeManager
     @State private var showingAppSelection = false
+    
+    init(viewModel: AuthenticationViewModel) {
+        _timeManager = StateObject(wrappedValue: TimeManager(authViewModel: viewModel))
+    }
     
     var body: some View {
         Form {
@@ -28,6 +33,7 @@ struct ProfileSettings: View {
         .navigationBarItems(leading: BackButton(dismiss: dismiss))
         .onAppear {
             viewModel.loadUserProfile()
+            timeManager.setTimeForSelectedMode(viewModel.selectedMode.timeLimit)
             Task {
                 try? await AuthorizationCenter.shared.requestAuthorization(for: .individual)
             }
@@ -113,10 +119,10 @@ private struct StudyPreferencesSection: View {
     @State private var isEditingSubjects = false
     @State private var isEditingMode = false
     @State private var tempSubjects: [String] = []
-    @State private var tempMode = ""
+    @State private var tempMode: StudyMode = .focus
     
     private let subjects = ["Maths", "Biology", "Physics", "Chemistry"]
-    private let modes = ["Focus Mode", "Balanced Mode", "Reward Mode"]
+    private let modes: [StudyMode] = [.focus, .balanced, .reward]
     
     var body: some View {
         Section(header: Text("Study Preferences")) {
@@ -182,16 +188,16 @@ private struct SubjectsField: View {
 
 private struct StudyModeField: View {
     @Binding var isEditing: Bool
-    @Binding var tempMode: String
-    let modes: [String]
-    let selectedMode: String
+    @Binding var tempMode: StudyMode
+    let modes: [StudyMode]
+    let selectedMode: StudyMode
     let updateMode: () -> Void
     
     var body: some View {
         if isEditing {
             Picker("Mode", selection: $tempMode) {
                 ForEach(modes, id: \.self) { mode in
-                    Text(mode).tag(mode)
+                    Text(mode.rawValue).tag(mode)
                 }
             }
             .pickerStyle(.wheel)
@@ -206,7 +212,7 @@ private struct StudyModeField: View {
             HStack {
                 Text("Study Mode")
                 Spacer()
-                Text(selectedMode)
+                Text(selectedMode.rawValue)
                     .foregroundColor(.gray)
             }
             .contentShape(Rectangle())
@@ -286,7 +292,7 @@ private struct AddAppsButton: View {
 
 #Preview {
     NavigationView {
-        ProfileSettings()
+        ProfileSettings(viewModel: AuthenticationViewModel())
             .environmentObject(AuthenticationViewModel())
     }
 } 

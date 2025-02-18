@@ -25,6 +25,23 @@ enum AuthenticationFlow {
   case register
 }
 
+enum StudyMode: String {
+    case focus = "Focus Mode"
+    case balanced = "Balanced Mode"
+    case reward = "Reward Mode"
+    
+    var timeLimit: Int {
+        switch self {
+        case .focus:
+            return 10 // 25 minutes
+        case .balanced:
+            return 15 // 25 minutes
+        case .reward:
+            return 30 // 10 minutes
+        }
+    }
+}
+
 @MainActor
 class AuthenticationViewModel: ObservableObject {
   @Published var email: String = ""
@@ -32,7 +49,7 @@ class AuthenticationViewModel: ObservableObject {
   @Published var confirmPassword: String = ""
   @Published var userName: String = ""
   @Published var selectedSubjects: [String] = []
-  @Published var selectedMode: String = "Focus Mode"
+  @Published var selectedMode: StudyMode = .focus // Default mode
   @Published var selectedApps: [String] = []
   @Published var notificationsEnabled: Bool = false
   @Published var screenTimeEnabled: Bool = false
@@ -218,7 +235,7 @@ class AuthenticationViewModel: ObservableObject {
     }
   }
 
-  func updateUserProfile(name: String? = nil, subjects: [String]? = nil, mode: String? = nil, apps: [String]? = nil, notifications: Bool? = nil, screenTime: Bool? = nil) {
+  func updateUserProfile(name: String? = nil, subjects: [String]? = nil, mode: StudyMode? = nil, apps: [String]? = nil, notifications: Bool? = nil, screenTime: Bool? = nil) {
     if let name = name {
       updateUserName(name)
     }
@@ -228,7 +245,7 @@ class AuthenticationViewModel: ObservableObject {
     }
     if let mode = mode {
       selectedMode = mode
-      UserDefaults.standard.set(mode, forKey: "userMode")
+      UserDefaults.standard.set(mode.rawValue, forKey: "userMode")
     }
     if let apps = apps {
       selectedApps = apps
@@ -247,7 +264,10 @@ class AuthenticationViewModel: ObservableObject {
   func loadUserProfile() {
     loadUserName()
     selectedSubjects = UserDefaults.standard.stringArray(forKey: "userSubjects") ?? []
-    selectedMode = UserDefaults.standard.string(forKey: "userMode") ?? "Focus Mode"
+    if let savedMode = UserDefaults.standard.string(forKey: "userMode"),
+       let mode = StudyMode(rawValue: savedMode) {
+      selectedMode = mode
+    }
     selectedApps = UserDefaults.standard.stringArray(forKey: "userApps") ?? []
     notificationsEnabled = UserDefaults.standard.bool(forKey: "notificationsEnabled")
     screenTimeEnabled = UserDefaults.standard.bool(forKey: "screenTimeEnabled")
