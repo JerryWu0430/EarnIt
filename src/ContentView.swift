@@ -17,7 +17,7 @@ struct ContentView: View {
                 if viewModel.showOnboarding {
                     OnboardingFlow()
                 } else {
-                    Home()
+                    Home(viewModel: viewModel)
                 }
             } else {
                 AuthenticationView(isPresented: $showingAuthentication)

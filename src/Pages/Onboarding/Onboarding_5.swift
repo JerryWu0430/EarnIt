@@ -11,7 +11,7 @@ struct Onboarding_5: View {
     @State var name: String = ""
     @Binding var currentStep: Int
     @EnvironmentObject var viewModel: AuthenticationViewModel
-    @State private var selectedMode: String = "Focus Mode"
+    @State private var selectedMode: StudyMode = .focus
     
     var body: some View {
         VStack{
@@ -20,38 +20,38 @@ struct Onboarding_5: View {
                 .padding(.bottom, 30)
             
             Button(action: { 
-                selectedMode = "Focus Mode"
+                selectedMode = .focus
                 viewModel.updateUserProfile(mode: selectedMode)
             }) {
                 ModeRow(color: Color.earnitAccent, modeName: "Focus Mode", firstHeadline: "25 Minutes", secondHeadline: "05 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
                     .shadow(color: .gray.opacity(0.2), radius: 10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(selectedMode == "Focus Mode" ? Color.earnitAccent : Color.clear, lineWidth: 2)
+                            .stroke(selectedMode == .focus ? Color.earnitAccent : Color.clear, lineWidth: 2)
                     )
             }.padding(.horizontal)
             
             Button(action: { 
-                selectedMode = "Balanced Mode"
+                selectedMode = .balanced
                 viewModel.updateUserProfile(mode: selectedMode)
             }) {
                 ModeRow(color: Color.green, modeName: "Balanced Mode", firstHeadline: "25 Minutes", secondHeadline: "25 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
                     .shadow(color: .gray.opacity(0.2), radius: 10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(selectedMode == "Balanced Mode" ? Color.green : Color.clear, lineWidth: 2)
+                            .stroke(selectedMode == .balanced ? Color.green : Color.clear, lineWidth: 2)
                     )
             }.padding(.horizontal)
             
             Button(action: { 
-                selectedMode = "Reward Mode"
+                selectedMode = .reward
                 viewModel.updateUserProfile(mode: selectedMode)
             }) {
                 ModeRow(color: Color.purple, modeName: "Reward Mode", firstHeadline: "10 Minutes", secondHeadline: "50 Minutes", firstSubheadline: "Learn with focus", secondSubheadline: "Screen Time")
                     .shadow(color: .gray.opacity(0.2), radius: 10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(selectedMode == "Reward Mode" ? Color.purple : Color.clear, lineWidth: 2)
+                            .stroke(selectedMode == .reward ? Color.purple : Color.clear, lineWidth: 2)
                     )
             }.padding(.horizontal)
             

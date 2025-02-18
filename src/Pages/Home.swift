@@ -9,9 +9,13 @@ import SwiftUI
 
 struct Home: View {
     @EnvironmentObject var viewModel: AuthenticationViewModel
-    @StateObject private var timeManager = TimeManager()
+    @StateObject private var timeManager: TimeManager
     @State private var showingSettings = false
     @State private var selectedSubject = "Maths"  // Default to Maths
+    
+    init(viewModel: AuthenticationViewModel) {
+        _timeManager = StateObject(wrappedValue: TimeManager(authViewModel: viewModel))
+    }
     
     var body: some View {
         NavigationView {
@@ -39,7 +43,11 @@ struct Home: View {
                     HomeRow(halved: true, header: timeManager.formatTime(timeManager.timeEarned), footer: "Time Earned", image: Image(systemName: "star.fill"), color: Color(hex: "#00B2FF"), backgroundColor: Color(hex: "#00B2FF").opacity(0.3))
                 }.padding(.horizontal)
                 
-                HomeRow(header: timeManager.formatTime(timeManager.totalScreenTime), footer: "Total Screen Time", image: Image(systemName: "hourglass.circle.fill"), color: Color(hex: "#FF8000"), backgroundColor: Color(hex: "#FF8000").opacity(0.3))
+                HomeRow(header: viewModel.selectedMode.rawValue,
+                       footer: "\(viewModel.selectedMode.timeLimit) Free Min",
+                       image: Image(systemName: "timer"),
+                       color: Color(hex: "#FF8000"), 
+                       backgroundColor: Color(hex: "#FF8000").opacity(0.3))
                     .padding(.horizontal)
                 
                 HStack {
@@ -80,6 +88,6 @@ struct Home: View {
 }
 
 #Preview {
-    Home()
+    Home(viewModel: AuthenticationViewModel())
         .environmentObject(AuthenticationViewModel())
 }

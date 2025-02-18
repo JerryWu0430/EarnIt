@@ -112,7 +112,7 @@ struct HomeRow: View {
     var backgroundColor: Color
     
     var body: some View {
-        HStack{
+        HStack {
             image
                 .renderingMode(.template)
                 .foregroundStyle(.white)
@@ -123,29 +123,26 @@ struct HomeRow: View {
                 .background(.white)
                 .clipShape(Circle())
             
-            if(halved){
+            if(halved) {
                 VStack(alignment: .leading, content: {
                     Text(header)
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.system(size: 20, weight: .bold))
+                        .minimumScaleFactor(0.8)
                     Text(footer)
                         .font(.caption)
                 })
                 Spacer()
-            }
-            else{
+            } else {
                 Text(header)
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
+                    .minimumScaleFactor(0.8)
                     .padding(.trailing)
                 Text(footer)
+                    .font(.caption)
                     .padding()
             }
             
             Spacer()
-            
-            
-
         }
         .padding()
         .frame(height: 70)

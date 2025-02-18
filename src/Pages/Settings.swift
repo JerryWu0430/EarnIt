@@ -13,6 +13,7 @@ struct Settings: View {
     @Environment(\.dismiss) var dismiss
     @State private var presentingConfirmationDialog = false
     @State private var showNotificationAlert = false
+    @State private var showDeleteAccountAlert = false
 
     var body: some View {
         NavigationView {
@@ -43,9 +44,7 @@ struct Settings: View {
                     // Settings List
                     List {
                         Section(header: Text("App Settings")) {
-                            NavigationLink(destination: ProfileSettings()
-                                .navigationBarBackButtonHidden(true)
-                            ) {
+                            NavigationLink(destination: ProfileSettings(viewModel: viewModel)) {
                                 ListRow(image: Image(systemName: "person.fill"), 
                                       text: "Profile", 
                                       content: { EmptyView() }(), 
