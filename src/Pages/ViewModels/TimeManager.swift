@@ -9,7 +9,7 @@ class TimeManager: ObservableObject {
     @Published var timeLeft: Int {
         didSet {
             UserDefaults.standard.set(timeLeft, forKey: "timeLeft")
-            print("Time left updated: \(timeLeft)") // Debugging output
+            print("Time left updated: \(timeLeft)")
             
             if timeLeft > 0 {
                 TimeLimitModel.shared.initiateMonitoring(timeLimit: timeLeft * 60)
@@ -61,6 +61,15 @@ class TimeManager: ObservableObject {
             }
         }
         
+        // Add observer for time reset
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name("ResetTimeLeft"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.resetTime()
+        }
+        
         print("Initial time left: \(timeLeft)")
     }
     
@@ -81,10 +90,8 @@ class TimeManager: ObservableObject {
     
     func addEarnedTime(_ minutes: Int) {
         timeEarned += minutes
-        // timeLeft is updated via timeEarned's didSet
-        print("Added time: \(minutes). New time left: \(timeLeft)") // Debugging output
+        print("Added time: \(minutes). New time left: \(timeLeft)")
         
-        // Stop shielding and restart monitoring if we now have time available
         if timeLeft > 0 {
             ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
             TimeLimitModel.shared.initiateMonitoring(timeLimit: timeLeft * 60)
@@ -124,5 +131,17 @@ class TimeManager: ObservableObject {
             // Every question = 5 minutes
             return correctAnswers * 5
         }
+    }
+    
+    // Add new function to reset time
+    private func resetTime() {
+        timeSpentOnApps = 0
+        timeEarned = 0
+        timeLeft = 0  // Reset to 0 instead of mode's time limit
+        
+        // Save the reset values
+        UserDefaults.standard.set(timeSpentOnApps, forKey: "timeSpentOnApps")
+        UserDefaults.standard.set(timeEarned, forKey: "timeEarned")
+        UserDefaults.standard.set(timeLeft, forKey: "timeLeft")
     }
 } 

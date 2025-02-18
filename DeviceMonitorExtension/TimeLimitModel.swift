@@ -19,11 +19,6 @@ class TimeLimitModel: ObservableObject {
         willSet {
             DataPersistence.shared.saveSelection(selection: newValue)
             
-            // Debugging outputs
-            print("New selection tokens: \(newValue.applicationTokens)")
-            print("Current time limit: \(PublicVariable.timeLimit)")
-            
-            // Only start shielding if time left is less than or equal to 0
             if !newValue.applicationTokens.isEmpty && PublicVariable.timeLimit <= 0 {
                 print("Starting shielding for applications.")
                 ManagedSettingsStoreHelper.shared.startApplicationsShielding()
@@ -46,55 +41,25 @@ class TimeLimitModel: ObservableObject {
     private let eventName = DeviceActivityEvent.Name(ScreenTimeConstant.EventName)
     
     private var timer: Timer?
-    
     private var cumulativeUsage: Int = 0
     
-    private func startPeriodicTimeCheck() {
-        timer?.invalidate()
-        cumulativeUsage = 0 // Reset when starting new monitoring session
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
-            self?.checkAppUsageTime()
-        }
-    }
-    
-    private func checkAppUsageTime() {
-        cumulativeUsage += 1 // Increment by one minute
-        NotificationCenter.default.post(
-            name: Notification.Name("UpdateTimeSpent"),
-            object: nil,
-            userInfo: ["minutes": cumulativeUsage]
-        )
-    }
-    
-    private func getCurrentAppUsage() -> Int {
-        return cumulativeUsage
-    }
-    
     private init() {
-        cumulativeUsage = 0
         isMonitoring = DataPersistence.shared.getMonitoringState()
-        // DEBUGGING OUTPUTS
-        // Start shielding immediately if apps are already selected
-        //if !selectionToDiscourage.applicationTokens.isEmpty {
-        //    ManagedSettingsStoreHelper.shared.startApplicationsShielding()
-        //    PublicVariable.timeLimit = 0
-        //}
     }
 
     func initiateMonitoring(timeLimit: Int) {
         guard timeLimit > 0 else {
-            print("Time limit is 0, not starting shielding.")
+            print("⚠️ Time limit is 0, not starting monitoring")
             return
         }
+        
+        print("🔄 Starting monitoring setup...")
         
         DataPersistence.shared.saveMonitoringState(isMonitoring: true)
         ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
         center.stopMonitoring()
         
-        selectionToDiscourage = DataPersistence.shared.savedGroupSelection() ?? FamilyActivitySelection()
-        
         let dateC = DateComponents(second: timeLimit)
-        
         let event = DeviceActivityEvent(
             applications: selectionToDiscourage.applicationTokens,
             categories: selectionToDiscourage.categoryTokens,
@@ -104,21 +69,41 @@ class TimeLimitModel: ObservableObject {
         
         do {
             try center.startMonitoring(activity, during: schedule, events: [eventName: event])
+            print("✅ Monitoring started successfully")
+            print("⏱️ Time limit: \(timeLimit) seconds")
+            print("🎯 Event name: \(eventName.rawValue)")
             PublicVariable.timeLimit = timeLimit
-            print("Monitoring started with time limit: \(timeLimit)")
-            
-            // Start periodic time check
-            startPeriodicTimeCheck()
+            startTimer()
         } catch {
-            print("Could not start monitoring \(error)")
+            print("❌ Failed to start monitoring: \(error)")
             ManagedSettingsStoreHelper.shared.startApplicationsShielding()
         }
     }
     
+    private func startTimer() {
+        timer?.invalidate()
+        cumulativeUsage = 0
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            print("Timer check - isUsingMonitoredApps: \(DeviceActivityMonitorExtension.isUsingMonitoredApps)")
+            if DeviceActivityMonitorExtension.isUsingMonitoredApps {
+                self.cumulativeUsage += 1
+                print("⏱️ Time elapsed: \(self.cumulativeUsage) minutes")
+                NotificationCenter.default.post(
+                    name: Notification.Name("UpdateTimeSpent"),
+                    object: nil,
+                    userInfo: ["minutes": self.cumulativeUsage]
+                )
+            }
+        }
+    }
+    
     func stopMonitoring() {
+        print("🛑 Stopping monitoring")
         timer?.invalidate()
         timer = nil
-        cumulativeUsage = 0 // Reset when stopping
+        cumulativeUsage = 0
         DataPersistence.shared.saveMonitoringState(isMonitoring: false)
         center.stopMonitoring()
         PublicVariable.timeLimit = 0
