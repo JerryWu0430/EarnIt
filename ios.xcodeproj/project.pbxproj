@@ -59,10 +59,10 @@
 		ED403E802D2F46A9008B6DC3 /* AuthenticatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E7F2D2F46A4008B6DC3 /* AuthenticatedView.swift */; };
 		ED403E822D2F46B1008B6DC3 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED403E812D2F46AC008B6DC3 /* AuthenticationView.swift */; };
 		ED403E862D2F4791008B6DC3 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED403E852D2F4791008B6DC3 /* FirebaseAnalytics */; };
+		EDC9A88A2D64F7AA000FCA7F /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF92D4311A600F15B7A /* ProfileSettings.swift */; };
 		EDDF35A92D6241C500B335E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDDF35A82D6241C500B335E9 /* GoogleService-Info.plist */; };
 		EDEFBCDD2D42C7D900F15B7A /* PendingVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCDC2D42C7D900F15B7A /* PendingVerificationView.swift */; };
 		EDEFBCF82D42F51800F15B7A /* OnboardingFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF72D42F51800F15B7A /* OnboardingFlow.swift */; };
-		EDEFBCFA2D4311A600F15B7A /* ProfileSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBCF92D4311A600F15B7A /* ProfileSettings.swift */; };
 		EDEFBCFC2D4336F600F15B7A /* mathQs.json in Resources */ = {isa = PBXBuildFile; fileRef = EDEFBCFB2D4336EC00F15B7A /* mathQs.json */; };
 		EDEFBCFE2D43370600F15B7A /* biologyQs.json in Resources */ = {isa = PBXBuildFile; fileRef = EDEFBCFD2D4336F900F15B7A /* biologyQs.json */; };
 		EDEFBD002D43370F00F15B7A /* physicsQs.json in Resources */ = {isa = PBXBuildFile; fileRef = EDEFBCFF2D43370900F15B7A /* physicsQs.json */; };
@@ -230,6 +230,7 @@
 		ED2199292D64E105008CBC89 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				DataPersistence.swift,
 				PublicVariables.swift,
 			);
 			target = ED2198DB2D64DD58008CBC89 /* DeviceActivityExtension */;
@@ -696,6 +697,7 @@
 				56B385742CE37420003F2CD4 /* Buttons.swift in Sources */,
 				561B0DFF2CEB4183006A6143 /* Onboarding_5.swift in Sources */,
 				561B0DFB2CEB3C88006A6143 /* Onboarding_3.swift in Sources */,
+				EDC9A88A2D64F7AA000FCA7F /* ProfileSettings.swift in Sources */,
 				561B0E0E2CEB5447006A6143 /* MarkdownObject.swift in Sources */,
 				561B0DF72CEB383B006A6143 /* Onboarding_1.swift in Sources */,
 				56B385672CE3719E003F2CD4 /* ContentView.swift in Sources */,
@@ -704,7 +706,6 @@
 				ED403E7E2D2F46A0008B6DC3 /* AuthenticationViewModel.swift in Sources */,
 				56B385652CE3719E003F2CD4 /* iosApp.swift in Sources */,
 				EDEFBD042D433F8400F15B7A /* Result.swift in Sources */,
-				EDEFBCFA2D4311A600F15B7A /* ProfileSettings.swift in Sources */,
 				561B0E122CEB54A4006A6143 /* Question.swift in Sources */,
 				561B0E162CEB5522006A6143 /* GameSession.swift in Sources */,
 				56B3857D2CE4E5D4003F2CD4 /* Paginations.swift in Sources */,

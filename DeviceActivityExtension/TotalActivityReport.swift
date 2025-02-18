@@ -56,4 +56,36 @@ struct TotalActivityReport: DeviceActivityReportScene {
     }
 }
 
+struct SelectedAppsList: DeviceActivityReportScene {
+    let context: DeviceActivityReport.Context = .init(rawValue: "Selected Apps")
+    let content: (ActivityReport) -> SelectedAppsView
+    
+    func makeConfiguration(representing data: DeviceActivityResults<DeviceActivityData>) async -> ActivityReport {
+        var list: [AppDeviceActivity] = []
+        
+        for await d in data {
+            for await a in d.activitySegments {
+                for await c in a.categories {
+                    for await ap in c.applications {
+                        let appName = (ap.application.localizedDisplayName ?? "nil")
+                        let bundle = (ap.application.bundleIdentifier ?? "nil")
+                        let app = AppDeviceActivity(
+                            id: bundle,
+                            displayName: appName,
+                            duration: 0,
+                            numberOfPickups: 0
+                        )
+                        // Only add if not already in list
+                        if !list.contains(where: { $0.id == bundle }) {
+                            list.append(app)
+                        }
+                    }
+                }
+            }
+        }
+        
+        return ActivityReport(totalDuration: 0, apps: list, totalSelectedDuration: 0)
+    }
+}
+
 

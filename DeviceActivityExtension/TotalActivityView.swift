@@ -43,3 +43,32 @@ struct ListRow: View {
         }
     }
 }
+
+struct SelectedAppsView: View {
+    var activityReport: ActivityReport
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if activityReport.apps.isEmpty {
+                Text("No apps selected")
+                    .foregroundColor(.secondary)
+                    .padding(.vertical, 8)
+            } else {
+                ForEach(activityReport.apps) { app in
+                    HStack {
+                        Image(systemName: "app.fill")
+                            .foregroundColor(.blue)
+                        Text(app.displayName)
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
+                    .padding(.vertical, 4)
+                    if app.id != activityReport.apps.last?.id {
+                        Divider()
+                    }
+                }
+            }
+        }
+        .padding(.horizontal)
+    }
+}

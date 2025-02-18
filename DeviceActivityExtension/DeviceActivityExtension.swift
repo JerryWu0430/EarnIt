@@ -13,7 +13,11 @@ struct DeviceActivityExtension: DeviceActivityReportExtension {
     var body: some DeviceActivityReportScene {
         // Create a report for each DeviceActivityReport.Context that your app supports.
         TotalActivityReport { totalActivity in
-            return TotalActivityView(activityReport: totalActivity)
+            TotalActivityView(activityReport: totalActivity)
+        }
+        // Add our new simplified report
+        SelectedAppsList { selectedApps in
+            SelectedAppsView(activityReport: selectedApps)
         }
         // Add more reports here...
     }
