@@ -40,7 +40,7 @@ class TimeManager: ObservableObject {
         self.authViewModel = authViewModel
         self.timeSpentOnApps = UserDefaults.standard.integer(forKey: "timeSpentOnApps")
         self.timeEarned = UserDefaults.standard.integer(forKey: "timeEarned")
-        self.timeLeft = authViewModel.selectedMode.timeLimit // Initialize with mode's time limit
+        self.timeLeft = authViewModel.selectedMode.timeLimit
         
         // Observe changes to selectedMode
         authViewModel.$selectedMode
@@ -49,6 +49,17 @@ class TimeManager: ObservableObject {
                 self?.resetForNewMode()
             }
             .store(in: &cancellables)
+        
+        // Observe time spent updates
+        NotificationCenter.default.addObserver(
+            forName: Notification.Name("UpdateTimeSpent"),
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            if let minutes = notification.userInfo?["minutes"] as? Int {
+                self?.updateTimeSpent(minutes)
+            }
+        }
         
         print("Initial time left: \(timeLeft)")
     }
@@ -72,6 +83,12 @@ class TimeManager: ObservableObject {
         timeEarned += minutes
         // timeLeft is updated via timeEarned's didSet
         print("Added time: \(minutes). New time left: \(timeLeft)") // Debugging output
+        
+        // Stop shielding and restart monitoring if we now have time available
+        if timeLeft > 0 {
+            ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
+            TimeLimitModel.shared.initiateMonitoring(timeLimit: timeLeft * 60)
+        }
     }
     
     func updateTimeSpent(_ minutes: Int) {

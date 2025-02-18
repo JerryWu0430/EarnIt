@@ -33,7 +33,7 @@ enum StudyMode: String {
     var timeLimit: Int {
         switch self {
         case .focus:
-            return 10 // 25 minutes
+            return 0 // 25 minutes
         case .balanced:
             return 15 // 25 minutes
         case .reward:
