@@ -246,6 +246,7 @@ private struct ConnectedAppsSection: View {
             }
             
             AddAppsButton(showingAppSelection: $showingAppSelection, model: model)
+            
         }
     }
 }

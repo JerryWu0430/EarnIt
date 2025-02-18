@@ -29,21 +29,30 @@ class TimeLimitModel: ObservableObject {
     var selectionToDiscourage = DataPersistence.shared.savedGroupSelection() ?? FamilyActivitySelection() {
         willSet {
             DataPersistence.shared.saveSelection(selection: newValue)
-            // Immediately start shielding when apps are selected
-            if !newValue.applicationTokens.isEmpty {
+            
+            // Debugging outputs
+            print("New selection tokens: \(newValue.applicationTokens)")
+            print("Current time limit: \(PublicVariable.timeLimit)")
+            
+            // Only start shielding if time left is less than or equal to 0
+            if !newValue.applicationTokens.isEmpty && PublicVariable.timeLimit <= 0 {
+                print("Starting shielding for applications.")
                 ManagedSettingsStoreHelper.shared.startApplicationsShielding()
-                PublicVariable.timeLimit = 0 // Set time limit to 0 to ensure blocking
+            } else {
+                print("Stopping shielding for applications.")
+                ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
             }
         }
     }
     
     private init() {
         isMonitoring = DataPersistence.shared.getMonitoringState()
+        // DEBUGGING OUTPUTS
         // Start shielding immediately if apps are already selected
-        if !selectionToDiscourage.applicationTokens.isEmpty {
-            ManagedSettingsStoreHelper.shared.startApplicationsShielding()
-            PublicVariable.timeLimit = 0
-        }
+        //if !selectionToDiscourage.applicationTokens.isEmpty {
+        //    ManagedSettingsStoreHelper.shared.startApplicationsShielding()
+        //    PublicVariable.timeLimit = 0
+        //}
     }
 
     func initiateMonitoring(timeLimit: Int) {
@@ -53,7 +62,7 @@ class TimeLimitModel: ObservableObject {
         }
         
         DataPersistence.shared.saveMonitoringState(isMonitoring: true)
-        ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
+        ManagedSettingsStoreHelper.shared.stopApplicationsShielding() // Ensure apps are unblocked
         center.stopMonitoring()
 
         selectionToDiscourage = DataPersistence.shared.savedGroupSelection() ?? FamilyActivitySelection()
@@ -83,5 +92,9 @@ class TimeLimitModel: ObservableObject {
         ManagedSettingsStoreHelper.shared.startApplicationsShielding() // Start shielding when monitoring stops
         center.stopMonitoring()
         PublicVariable.timeLimit = 0
+    }
+
+    func stopShielding() {
+        ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
     }
 }

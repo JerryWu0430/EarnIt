@@ -17,7 +17,7 @@ class ManagedSettingsStoreHelper {
     init() {}
     
     func stopApplicationsShielding() {
-        print("Stop Shielding")
+        print("Stopping shielding for applications")
         
         store.shield.applications?.removeAll()
         store.shield.webDomains?.removeAll()
