@@ -44,7 +44,7 @@ struct Home: View {
                 }.padding(.horizontal)
                 
                 HomeRow(header: viewModel.selectedMode.rawValue,
-                       footer: "\(viewModel.selectedMode.timeLimit) min",
+                       footer: "\(viewModel.selectedMode.timeLimit) Free Min",
                        image: Image(systemName: "timer"),
                        color: Color(hex: "#FF8000"), 
                        backgroundColor: Color(hex: "#FF8000").opacity(0.3))

@@ -6,6 +6,7 @@ struct Result: View {
     let earnedMinutes: Int
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var timeManager: TimeManager
+    @State private var hasClaimedReward = false
     
     var body: some View {
         VStack {
@@ -44,22 +45,27 @@ struct Result: View {
                 .fontWeight(.bold)
                 .padding(.top)
             
-            Text("Congratulation you earned \(earnedMinutes) more\nminutes of screen time. Now your\nupdated screen time is \(timeManager.timeLeft) minutes")
+            Text("Congratulation you earned \(earnedMinutes) more\nminutes of screen time. Now your\nupdated screen time is \(hasClaimedReward ? timeManager.timeLeft : timeManager.timeLeft + earnedMinutes) minutes")
                 .multilineTextAlignment(.center)
                 .padding(.top, 5)
             
             Spacer()
             
             // Action buttons
-            Button(action: {
-                // Navigate to new quiz
-            }) {
-                CustomButton(buttonType: .outline, text: "Play More")
+            if !hasClaimedReward {
+                Button(action: {
+                    timeManager.addEarnedTime(earnedMinutes)
+                    hasClaimedReward = true
+                }) {
+                    CustomButton(buttonType: .outline, text: "Claim Reward")
+                }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
             
             Button(action: {
-                // Navigate back to home
+                if !hasClaimedReward {
+                    timeManager.addEarnedTime(earnedMinutes)
+                }
                 dismiss()
             }) {
                 CustomButton(buttonType: .full, text: "Back Home")

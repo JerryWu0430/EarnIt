@@ -94,4 +94,18 @@ class TimeManager: ObservableObject {
     func setTimeForSelectedMode(_ timeLimit: Int) {
         updateTimeLeft() // This will use the new mode's time limit
     }
+    
+    func calculateEarnedMinutes(correctAnswers: Int) -> Int {
+        switch authViewModel.selectedMode {
+        case .focus:
+            // Every 5 questions = 1 minute
+            return correctAnswers / 5
+        case .balanced:
+            // Every question = 1 minute
+            return correctAnswers
+        case .reward:
+            // Every question = 5 minutes
+            return correctAnswers * 5
+        }
+    }
 } 

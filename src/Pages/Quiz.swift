@@ -29,7 +29,7 @@ struct Quiz: View {
             if showingResult {
                 Result(correctAnswers: correctAnswers, 
                       totalQuestions: 10, 
-                      earnedMinutes: correctAnswers / 2)
+                      earnedMinutes: timeManager.calculateEarnedMinutes(correctAnswers: correctAnswers))
             } else if let question = currentQuestion {
                 VStack(alignment: .leading) {
                     HStack {
@@ -137,8 +137,6 @@ struct Quiz: View {
             answered = false
         } else {
             timer?.invalidate()
-            let earnedMinutes = correctAnswers / 2
-            timeManager.addEarnedTime(earnedMinutes)
             showingResult = true
         }
     }
