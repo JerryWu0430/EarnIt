@@ -27,25 +27,37 @@ class TimeLimitModel: ObservableObject {
     private let eventName = DeviceActivityEvent.Name(ScreenTimeConstant.EventName)
     
     var selectionToDiscourage = DataPersistence.shared.savedGroupSelection() ?? FamilyActivitySelection() {
-        
         willSet {
             DataPersistence.shared.saveSelection(selection: newValue)
-            ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
+            // Immediately start shielding when apps are selected
+            if !newValue.applicationTokens.isEmpty {
+                ManagedSettingsStoreHelper.shared.startApplicationsShielding()
+                PublicVariable.timeLimit = 0 // Set time limit to 0 to ensure blocking
+            }
         }
     }
     
     private init() {
         isMonitoring = DataPersistence.shared.getMonitoringState()
+        // Start shielding immediately if apps are already selected
+        if !selectionToDiscourage.applicationTokens.isEmpty {
+            ManagedSettingsStoreHelper.shared.startApplicationsShielding()
+            PublicVariable.timeLimit = 0
+        }
     }
 
     func initiateMonitoring(timeLimit: Int) {
-        // ManagedSettingsStoreHelper.shared.startApplicationsShielding()
+        guard timeLimit > 0 else {
+            ManagedSettingsStoreHelper.shared.startApplicationsShielding()
+            return
+        }
+        
         DataPersistence.shared.saveMonitoringState(isMonitoring: true)
         ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
         center.stopMonitoring()
 
         selectionToDiscourage = DataPersistence.shared.savedGroupSelection() ?? FamilyActivitySelection()
-
+        
         let dateC = DateComponents(second: timeLimit)
 
         let event = DeviceActivityEvent(
@@ -57,16 +69,19 @@ class TimeLimitModel: ObservableObject {
 
         do {
             try center.startMonitoring(activity, during: schedule, events: [eventName: event])
-            print("Monitoring")
-            print(timeLimit)
+            PublicVariable.timeLimit = timeLimit
+            print("Monitoring started with time limit: \(timeLimit)")
         } catch {
-            print ("Could not start monitoring \(error)")
+            print("Could not start monitoring \(error)")
+            // If monitoring fails, shield the apps
+            ManagedSettingsStoreHelper.shared.startApplicationsShielding()
         }
     }
     
     func stopMonitoring() {
         DataPersistence.shared.saveMonitoringState(isMonitoring: false)
-        ManagedSettingsStoreHelper.shared.stopApplicationsShielding()
+        ManagedSettingsStoreHelper.shared.startApplicationsShielding() // Start shielding when monitoring stops
         center.stopMonitoring()
+        PublicVariable.timeLimit = 0
     }
 }

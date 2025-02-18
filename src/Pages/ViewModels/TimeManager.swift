@@ -1,10 +1,19 @@
 import Foundation
 import SwiftUI
+import FamilyControls
+import DeviceActivity
 
 class TimeManager: ObservableObject {
     @Published var timeLeft: Int {
         didSet {
             UserDefaults.standard.set(timeLeft, forKey: "timeLeft")
+            // Update device activity monitoring when time changes
+            if timeLeft > 0 {
+                TimeLimitModel.shared.initiateMonitoring(timeLimit: timeLeft * 60) // Convert minutes to seconds
+            } else {
+                TimeLimitModel.shared.stopMonitoring()
+                ManagedSettingsStoreHelper.shared.startApplicationsShielding()
+            }
         }
     }
     
@@ -33,7 +42,10 @@ class TimeManager: ObservableObject {
     }
     
     func useScreenTime(_ minutes: Int) {
-        guard timeLeft >= minutes else { return }
+        guard timeLeft >= minutes else { 
+            ManagedSettingsStoreHelper.shared.startApplicationsShielding()
+            return 
+        }
         timeLeft -= minutes
     }
     
